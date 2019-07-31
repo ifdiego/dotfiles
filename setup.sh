@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cp git/.gitconfig ~/.gitconfig
-cp bash/.bashrc ~/.bashrc
+cp git/.gitconfig $HOME/.gitconfig
+cp bash/.bashrc $HOME/.bashrc
 
 echo "Files copied."
