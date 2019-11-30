@@ -5,12 +5,12 @@ For now, it's really simple, it only has `bash` and `git` files.
 
 ## Install
 
-To install just run: 
-```
-./install.sh
-```
-
-Maybe, before install it, you need to give `setup.sh` permission with the command:
+First, give permission to the `install.sh` file with the command:
 ```
 chmod +x install.sh
+```
+
+Then just install it by running: 
+```
+./install.sh
 ```
