@@ -1,7 +1,3 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -9,7 +5,6 @@ case $- in
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
 HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
@@ -43,6 +38,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
+
 #force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
@@ -72,34 +68,9 @@ xterm*|rxvt*)
     ;;
 esac
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -115,3 +86,100 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+#PS1='\[\033[1;36m\]\u\[\033[1;31m\]@\[\033[1;32m\]\h:\[\033[1;35m\]\w\[\033[1;31m\]\$\[\033[0m\] '
+
+# A partir daqui editar para os novos dotfiles
+prompt_git() {
+    local s=""
+    local branchName=""
+
+    # check if the current directory is in a git repository
+    if [ $(git rev-parse --is-inside-work-tree &>/dev/null; printf "%s" $?) == 0 ]; then
+
+        # check if the current directory is in .git before running git checks
+        if [ "$(git rev-parse --is-inside-git-dir 2> /dev/null)" == "false" ]; then
+
+            # ensure index is up to date
+            git update-index --really-refresh  -q &>/dev/null
+
+            # check for uncommitted changes in the index
+            if ! $(git diff --quiet --ignore-submodules --cached); then
+                s="$s+";
+            fi
+
+            # check for unstaged changes
+            if ! $(git diff-files --quiet --ignore-submodules --); then
+                s="$s!";
+            fi
+
+            # check for untracked files
+            if [ -n "$(git ls-files --others --exclude-standard)" ]; then
+                s="$s?";
+            fi
+
+            # check for stashed files
+            if $(git rev-parse --verify refs/stash &>/dev/null); then
+                s="$s$";
+            fi
+
+        fi
+
+        # get the short symbolic ref
+        # if HEAD isn't a symbolic ref, get the short SHA
+        # otherwise, just give up
+        branchName="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
+                      git rev-parse --short HEAD 2> /dev/null || \
+                      printf "(unknown)")"
+
+        [ -n "$s" ] && s=" [$s]"
+
+        printf "%s" "$1$branchName$s"
+    else
+        return
+    fi
+}
+
+bold='';
+reset="\e[0m";
+black="\e[1;30m";
+blue="\e[1;34m";
+cyan="\e[1;36m";
+green="\e[1;32m";
+orange="\e[1;33m";
+purple="\e[1;35m";
+red="\e[1;31m";
+violet="\e[1;35m";
+white="\e[1;37m";
+yellow="\e[1;33m";
+
+user="\e[1;36m"; #cyan
+host="\e[1;32m"; #green
+directory="\e[1;33m"; #yellow
+gitDetails="\e[1;31m"; #red
+
+# Highlight the user name when logged in as root.
+if [[ "${USER}" == "root" ]]; then
+	user="${blue}";
+else
+	user="${cyan}";
+fi;
+
+# Highlight the hostname when connected via SSH.
+if [[ "${SSH_TTY}" ]]; then
+	host="${violet}";
+else
+	host="${green}";
+fi;
+
+# Set the terminal title and prompt.
+#PS1="\[\033]0;\W\007\]"; # working directory base name
+PS1="\[${user}\]\u"; # username
+PS1+="\[${white}\] at ";
+PS1+="\[${host}\]\h"; # host
+PS1+="\[${white}\] in ";
+PS1+="\[${directory}\]\W"; # working directory full path
+PS1+="\$(prompt_git \"\[${white}\] on \[${gitDetails}\]\")"; # Git repository details
+PS1+="\n";
+PS1+="\[${white}\]\$ \[${reset}\]"; # `$` (and reset color)
+export PS1;
