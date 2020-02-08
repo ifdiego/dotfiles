@@ -89,7 +89,6 @@ fi
 
 #PS1='\[\033[1;36m\]\u\[\033[1;31m\]@\[\033[1;32m\]\h:\[\033[1;35m\]\w\[\033[1;31m\]\$\[\033[0m\] '
 
-# A partir daqui editar para os novos dotfiles
 prompt_git() {
     local s=""
     local branchName=""
@@ -153,11 +152,6 @@ violet="\e[1;35m";
 white="\e[1;37m";
 yellow="\e[1;33m";
 
-user="\e[1;36m"; #cyan
-host="\e[1;32m"; #green
-directory="\e[1;33m"; #yellow
-gitDetails="\e[1;31m"; #red
-
 # Highlight the user name when logged in as root.
 if [[ "${USER}" == "root" ]]; then
 	user="${blue}";
@@ -174,12 +168,12 @@ fi;
 
 # Set the terminal title and prompt.
 #PS1="\[\033]0;\W\007\]"; # working directory base name
-PS1="\[${user}\]\u"; # username
+PS1="\[${cyan}\]\u"; # username
 PS1+="\[${white}\] at ";
-PS1+="\[${host}\]\h"; # host
+PS1+="\[${green}\]\h"; # host
 PS1+="\[${white}\] in ";
-PS1+="\[${directory}\]\W"; # working directory full path
-PS1+="\$(prompt_git \"\[${white}\] on \[${gitDetails}\]\")"; # Git repository details
+PS1+="\[${yellow}\]\W"; # working directory full path
+PS1+="\$(prompt_git \"\[${white}\] on \[${red}\]\")"; # Git repository details
 PS1+="\n";
 PS1+="\[${white}\]\$ \[${reset}\]"; # `$` (and reset color)
 export PS1;

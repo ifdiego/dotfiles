@@ -1,11 +1,7 @@
 #!/bin/bash
 
-# ALIASES QUE JÁ ESTAVAM NO .BASHRC
-
 # enable color support of ls and also add handy aliases
 alias ls='ls --color=auto'
-#alias dir='dir --color=auto'
-#alias vdir='vdir --color=auto'
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -20,6 +16,5 @@ alias l='ls -CF'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# NOVOS QUE EU VOU VER PRA ADICIONAR
 alias gs='git status'
 alias ..='cd ..'
