@@ -1,16 +1,13 @@
 # Dotfiles
 
-This is my Bash configuration.  
-For now, it's really simple, it only has `bash` and `git` files.
+These are my configuration files for Ubuntu Linux.
 
-## Install
+The `install.sh` script will handle everything. It'll install tools such as `git`, `vim`, `curl` and a bunch of other tools that help programmings tasks.
 
-First, give permission to the `install.sh` file with the command:
-```
-chmod +x install.sh
-```
+And also will config those programs sending the files to home folder.
 
-Then just install it by running: 
+## Installation
+If you want to install everything exactly like me, first, you need to give `install.sh` permission with the command `chmod +x install.sh` and then you can running it with:
 ```
 ./install.sh
 ```

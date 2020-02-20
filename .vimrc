@@ -21,18 +21,22 @@ set background=dark
 colorscheme nord
 
 set encoding=UTF-8
+set fileencoding=UTF-8
 set nocompatible
 set number
+set relativenumber
 set autoindent
 set tabstop=2
 set shiftwidth=2
 set expandtab
+set smarttab
 set cursorline
 set showcmd
 set guifont=Source\ Code\ Pro\ 14
 set hidden
 set nobackup
 set nowritebackup
+set laststatus=2
 
 map <C-t> :NERDTreeToggle<CR>
 map <C-p> :Files<CR>
@@ -44,5 +48,26 @@ let g:indentLine_bufNameExclude=['NERD_tree.*']
 
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeQuitOnOpen = 1
+
+" Copy and paste to/from VIM and the clipboard
+nnoremap <C-y> +y
+vnoremap <C-y> +y
+nnoremap <C-p> +P
+vnoremap <C-p> +P
+
+" Access system clipboard
+set clipboard=unnamed
+
+" Don't use arrowkeys
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
+" Really, just don't
+inoremap <Up>    <NOP>
+inoremap <Down>  <NOP>
+inoremap <Left>  <NOP>
+inoremap <Right> <NOP>
 
 command! Q q
