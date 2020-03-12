@@ -2,7 +2,7 @@
 
 installation() {
   sudo apt update
-  sudo apt install build-essential git curl wget vim neofetch htop nmap tmux neovim
+  sudo apt install build-essential git curl wget vim neofetch htop nmap tmux neovim openssh-server
   sudo apt upgrade
   echo "Installation completed"
 }
