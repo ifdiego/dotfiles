@@ -37,6 +37,10 @@ set hidden
 set nobackup
 set nowritebackup
 set laststatus=2
+set autoread
+set cursorline
+set showcmd
+set showmatch
 
 map <C-t> :NERDTreeToggle<CR>
 map <C-p> :Files<CR>
