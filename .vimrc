@@ -41,6 +41,7 @@ set autoread
 set cursorline
 set showcmd
 set showmatch
+set ruler
 
 map <C-t> :NERDTreeToggle<CR>
 map <C-p> :Files<CR>
