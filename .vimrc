@@ -24,7 +24,6 @@ set encoding=UTF-8
 set fileencoding=UTF-8
 set nocompatible
 set number
-set relativenumber
 set autoindent
 set tabstop=2
 set shiftwidth=2
