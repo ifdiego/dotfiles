@@ -2,7 +2,7 @@
 
 These are my configuration files for Ubuntu Linux.
 
-The `install.sh` script will handle everything. It'll install tools such as `git`, `vim`, `curl` and a bunch of other tools that help programmings tasks.
+The `install.sh` script will handle everything. It'll install tools such as `git`, `vim` and a bunch of other tools for a complete enviroment.
 
 And also it'll configure those programs sending the files to home folder.
 
