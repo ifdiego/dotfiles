@@ -3,7 +3,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'arcticicestudio/nord-vim'
 Plug 'vim-airline/vim-airline'
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
 Plug 'pangloss/vim-javascript'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -12,6 +12,13 @@ Plug 'alvan/vim-closetag'
 Plug 'Yggdroot/indentLine'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'lervag/vimtex'
+Plug 'dense-analysis/ale'
+Plug 'rhysd/vim.wasm'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'rust-lang/rust.vim'
+Plug 'whatyouhide/vim-gotham'
+Plug 'rhysd/vim-clang-format'
 
 " Initialize plugin system
 call plug#end()
@@ -20,6 +27,7 @@ syntax on
 set termguicolors
 set background=dark
 colorscheme nord
+" colorscheme gotham
 
 set encoding=UTF-8
 set fileencoding=UTF-8
