@@ -17,7 +17,6 @@ Plug 'dense-analysis/ale'
 Plug 'rhysd/vim.wasm'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'rust-lang/rust.vim'
-Plug 'whatyouhide/vim-gotham'
 Plug 'rhysd/vim-clang-format'
 
 " Initialize plugin system
@@ -27,7 +26,6 @@ syntax on
 set termguicolors
 set background=dark
 colorscheme nord
-" colorscheme gotham
 
 set encoding=UTF-8
 set fileencoding=UTF-8
