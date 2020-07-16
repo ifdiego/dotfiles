@@ -1,13 +1,8 @@
 # Dotfiles
 
-These are my configuration files for Ubuntu Linux usage.
-
-The `install.sh` script will handle everything. It'll install tools such as `git`, `vim` and a bunch of other tools for a complete programming environment.
-
-And also it'll configure those tools sending the proper files to home directory.
+My personal dotfiles on Ubuntu Linux usage.
 
 ## Installation
-If you want to install everything exactly like me, first, you need to give `install.sh` permission with the command `chmod +x install.sh` and then running it with:
-```
-./install.sh
-```
+The script below will handle everything. It will install tools for a complete programming environment abd create symbolic links to the user configuration home directory.
+
+Run `./install.sh` after give it permission to execute and configure the system.
