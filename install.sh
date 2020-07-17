@@ -14,6 +14,10 @@ installation() {
   sudo apt install nmap
   sudo apt ubuntu-restricted-extras
   sudo apt install tmux
+  sudo apt install binwalk
+  sudo apt install qemu
+  sudo apt install gnupg
+  sudo apt install cowsay
   #sudo apt install neovim
   #sudo apt install openssh-server
   sudo apt update
