@@ -18,6 +18,8 @@ installation() {
   sudo apt install qemu
   sudo apt install gnupg
   sudo apt install cowsay
+  sudo apt install tree
+  sudo apt install net-tools
   #sudo apt install neovim
   #sudo apt install openssh-server
   sudo apt update
