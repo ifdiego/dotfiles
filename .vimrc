@@ -17,7 +17,16 @@ Plug 'dense-analysis/ale'
 Plug 'rhysd/vim.wasm'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'rust-lang/rust.vim'
+Plug 'whatyouhide/vim-gotham'
 Plug 'rhysd/vim-clang-format'
+Plug 'joshdick/onedark.vim'
+Plug 'rakr/vim-one'
+Plug 'raphamorim/lucario'
+Plug 'cocopon/iceberg.vim'
+Plug 'joshdick/onedark.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'jonathanfilip/vim-lucius'
+Plug 'cormacrelf/vim-colors-github'
 
 " Initialize plugin system
 call plug#end()
@@ -25,7 +34,12 @@ call plug#end()
 syntax on
 set termguicolors
 set background=dark
-colorscheme nord
+" colorscheme nord
+" colorscheme gotham
+" colorscheme onedark
+" colorscheme one
+colorscheme lucario
+" colorscheme iceberg
 
 set encoding=UTF-8
 set fileencoding=UTF-8
@@ -44,10 +58,9 @@ set nobackup
 set nowritebackup
 set laststatus=2
 set autoread
-set cursorline
-set showcmd
 set showmatch
 set ruler
+set textwidth=80
 
 map <C-t> :NERDTreeToggle<CR>
 map <C-p> :Files<CR>
@@ -59,6 +72,10 @@ let g:indentLine_bufNameExclude=['NERD_tree.*']
 
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeQuitOnOpen = 1
+
+if $TERM == "xterm-256color"
+  set t_Co=256
+endif
 
 " Copy and paste to/from VIM and the clipboard
 nnoremap <C-y> +y
