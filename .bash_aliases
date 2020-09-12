@@ -18,3 +18,5 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 alias gs='git status'
 alias ..='cd ..'
+alias python='python3'
+alias vim='nvim'
