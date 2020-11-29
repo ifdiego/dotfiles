@@ -1,15 +1,11 @@
 #!/bin/bash
 
 echo "Setting up Linux"
-sudo add-apt-repository ppa:git-core/ppa
 sudo apt update
-sudo apt install curl \
-  build-essential wget git \
-  vim neofetch htop nmap \
-  ubuntu-restricted-extras \
-  tmux binwalk qemu gnupg \
-  cowsay tree net-tools neovim \
-  openssh-server
+sudo apt install \
+  curl build-essential \
+  wget git vim neofetch \
+  htop nmap tmux openssh-client
 
 sudo apt update
 sudo apt upgrade
