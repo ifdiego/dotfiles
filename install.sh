@@ -1,23 +1,23 @@
 #!/bin/bash
 
-echo "Setting up Linux"
 sudo apt update
 sudo apt install \
-  curl build-essential \
-  wget git vim neofetch \
-  htop nmap tmux openssh-client
+  git curl wget vim \
+  neofetch htop nmap \
+  tmux ffmpeg qbittorrent \
+  vlc gnome-tweaks \
+  build-essential xsel \
+  openssh-client
 
 sudo apt update
 sudo apt upgrade
 
-echo "Moving scripts to user directory"
-cp .gitconfig $HOME/.gitconfig
-cp .bashrc $HOME/.bashrc
-cp .bash_aliases $HOME/.bash_aliases
-cp .vim $HOME -r
-cp .vimrc $HOME/.vimrc
+cp .gitconfig ~/.gitconfig
+cp .bashrc ~/.bashrc
+cp .bash_aliases ~/.bash_aliases
+cp .vim ~ -r
+cp .vimrc ~/.vimrc
 
-echo "Installing VIM plugins"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 clear

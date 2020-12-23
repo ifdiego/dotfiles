@@ -1,5 +1,4 @@
 "call plug#begin('~/.vim/plugged')
-"
 "call plug#end()
 
 syntax on
@@ -22,10 +21,13 @@ set shiftwidth=2
 set autoindent
 set smarttab
 set ruler
+set incsearch
+set confirm
 
 "map <C-t> :NERDTreeToggle<CR>
 "map <C-p> :Files<CR>
 map <space> /
+map q :quit<CR>
 
 "let g:NERDTreeMinimalUI=1
 "let g:NERDTreeQuitOnOpen = 1
@@ -44,6 +46,8 @@ inoremap <Left> <NOP>
 inoremap <Right> <NOP>
 
 inoremap jj <Esc>
+
+vnoremap <C-C> :w !xsel -b<CR><CR>
 
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 autocmd BufWritePre * :%s/\s\+$//e
