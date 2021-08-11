@@ -1,57 +1,32 @@
-"call plug#begin('~/.vim/plugged')
-"call plug#end()
+call plug#begin('~/.vim/plugged')
+Plug 'preservim/nerdtree'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-commentary'
+call plug#end()
 
 syntax on
 filetype plugin indent on
 
-set nocompatible
-set encoding=utf-8
-set autoread
-set clipboard=unnamedplus
-set expandtab
 set number
-set showcmd
-set showmatch
-set hlsearch
-set wildmenu
-set ignorecase
-set smartcase
+set autoindent
+set backspace=indent,eol,start
+set smarttab
 set tabstop=2
 set shiftwidth=2
-set autoindent
-set smarttab
-set ruler
+set expandtab
+set hlsearch
+set ignorecase
 set incsearch
-set confirm
+set wildmenu
+set ruler
 
-"map <C-t> :NERDTreeToggle<CR>
-"map <C-p> :Files<CR>
-map <space> /
-map q :quit<CR>
-
-"let g:NERDTreeMinimalUI=1
-"let g:NERDTreeQuitOnOpen = 1
-"let NERDTreeShowHidden=1
-
+colorscheme peachpuff
 highlight Comment ctermfg=green
 
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+map <C-t> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
 
-inoremap <Up> <NOP>
-inoremap <Down> <NOP>
-inoremap <Left> <NOP>
-inoremap <Right> <NOP>
-
-inoremap jj <Esc>
-
-vnoremap <C-C> :w !xsel -b<CR><CR>
-
-autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 autocmd BufWritePre * :%s/\s\+$//e
-autocmd FocusGained,BufEnter * :silent! !
 
 command! W w
 command! WQ wq

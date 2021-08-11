@@ -1,29 +1,21 @@
 #!/bin/bash
 
-sudo apt update
-sudo apt install \
-  git curl wget vim \
-  neofetch htop nmap \
-  tmux ffmpeg qbittorrent \
-  vlc gnome-tweaks \
-  build-essential xsel \
-  openssh-client
+sudo pacman -S \
+  git curl vim tmux htop neofetch wget xterm nmap ffmpeg \
+  firefox qbittorrent mpv simplescreenrecorder shotwell ttf-droid \
+  rlwrap lsof jq tree xclip zathura zathura-pdf-poppler \
+  base-devel go elixir clojure leiningen python-pip
 
-sudo apt update
-sudo apt upgrade
+files=".bashrc .gitconfig .ssh/config .vimrc .tmux.conf .Xresources"
 
-cp .gitconfig ~/.gitconfig
-cp .bashrc ~/.bashrc
-cp .bash_aliases ~/.bash_aliases
-cp .vim ~ -r
-cp .vimrc ~/.vimrc
+for file in $files; do
+  ln -s ~/dotfiles/$file ~/$file
+done
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-clear
 vim -c "PlugInstall" -c "q" -c "q"
 
-sudo apt update
-sudo apt upgrade
+xrdb ~/.Xresources
 
 source ~/.bashrc

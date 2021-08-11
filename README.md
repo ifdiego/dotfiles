@@ -1,8 +1,17 @@
 # Dotfiles
 
-My personal dotfiles on Ubuntu Linux usage.
+My configuration files for a linux setup.
 
 ## Installation
-The script below will handle everything. It will install tools for a complete programming environment and create symbolic links to the user configuration home directory.
 
-Run `./install.sh` after give it permission to execute and configure the system.
+First, clone this repository to `~/dotfiles`. It will create symbolic links from this repo to the user configurations. Using this setup, the environment and bash settings of my machine will be fully configurated.
+
+Run `./install.sh`. It will install the following system dependencies:
+
+- Bash
+  - Custom prompt
+- Tmux and Vim
+  - Minimal vim
+  - Seamless navigation
+
+As well as configuring a set of programming languages and development tools.
