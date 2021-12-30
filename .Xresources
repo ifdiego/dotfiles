@@ -1,8 +1,9 @@
 xterm*faceName: xft: Droid Sans Mono
-xterm*faceSize: 10
+xterm*faceSize: 12
 xterm*saveLines: 2000
 xterm*foreground: white
-xterm*background: #1c1c1c
+xterm*background: #1e1e1e
+xterm*color4: cornflowerblue
 xterm*selectToClipboard: true
 xterm*VT100.Translations: #override \
   Shift <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0) \n\
