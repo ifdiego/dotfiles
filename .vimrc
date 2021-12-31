@@ -1,34 +1,23 @@
-call plug#begin('~/.vim/plugged')
-Plug 'preservim/nerdtree'
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-commentary'
-call plug#end()
-
-syntax on
 filetype plugin indent on
-
-set number
+syntax on
 set autoindent
-set backspace=indent,eol,start
+set number
+set ruler
+colorscheme peachpuff
 set smarttab
-set tabstop=2
-set shiftwidth=2
-set expandtab
 set hlsearch
 set ignorecase
 set incsearch
+set smartcase
+set shiftwidth=2
+set expandtab
+set tabstop=2
+set splitbelow
+set splitright
+set scrolloff=8
 set wildmenu
-set ruler
 
-colorscheme peachpuff
-highlight Comment ctermfg=green
-
-map <C-t> :NERDTreeToggle<CR>
-let NERDTreeShowHidden=1
+let g:python_highlight_all = 1
 
 autocmd BufWritePre * :%s/\s\+$//e
-
-command! W w
-command! WQ wq
-command! Wq wq
-command! Q q
+autocmd BufWinEnter * :highlight Comment ctermfg=green
