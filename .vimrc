@@ -1,9 +1,19 @@
+call plug#begin('~/.vim/plugged')
+Plug 'preservim/nerdtree'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'dense-analysis/ale'
+Plug 'sheerun/vim-polyglot'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-commentary'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+call plug#end()
+
 filetype plugin indent on
 syntax on
 set autoindent
 set number
 set ruler
-colorscheme peachpuff
 set smarttab
 set hlsearch
 set ignorecase
@@ -14,10 +24,24 @@ set expandtab
 set tabstop=2
 set splitbelow
 set splitright
-set scrolloff=8
+set scrolloff=5
+set hidden
+set clipboard+=unnamedplus
+set inccommand=split
+set laststatus=0
+set title
 set wildmenu
 
-let g:python_highlight_all = 1
+let mapleader="\<space>"
+let NERDTreeShowHidden=1
+
+nnoremap <c-t> :NERDTreeToggle<cr>
+nnoremap <c-p> :Files<cr>
+nnoremap <silent> <leader>h :tabprevious<cr>
+nnoremap <silent> <leader>l :tabnext<cr>
+nnoremap <leader>/ :Commentary<cr>
+vnoremap <leader>/ :Commentary<cr>
+inoremap <silent><expr> <c-space> coc#refresh()
 
 autocmd BufWritePre * :%s/\s\+$//e
-autocmd BufWinEnter * :highlight Comment ctermfg=green
+autocmd BufRead COMMIT_EDITMSG setlocal spell
