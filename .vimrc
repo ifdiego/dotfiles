@@ -6,6 +6,7 @@ Plug 'dense-analysis/ale'
 Plug 'sheerun/vim-polyglot'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
+Plug 'github/copilot.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
@@ -30,10 +31,15 @@ set clipboard+=unnamedplus
 set inccommand=split
 set laststatus=0
 set title
+set signcolumn=number
 set wildmenu
 
 let mapleader="\<space>"
 let NERDTreeShowHidden=1
+
+highlight clear SignColumn
+highlight CocInfoSign ctermfg=black ctermbg=blue
+highlight CocHintSign ctermfg=black ctermbg=red
 
 nnoremap <c-t> :NERDTreeToggle<cr>
 nnoremap <c-p> :Files<cr>
