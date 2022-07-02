@@ -6,7 +6,6 @@ Plug 'dense-analysis/ale'
 Plug 'sheerun/vim-polyglot'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
-Plug 'github/copilot.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
@@ -30,7 +29,6 @@ set hidden
 set clipboard+=unnamedplus
 set inccommand=split
 set laststatus=0
-set title
 set signcolumn=number
 set wildmenu
 
