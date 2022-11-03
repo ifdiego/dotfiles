@@ -1,0 +1,14 @@
+xterm*faceName: xft: Droid Sans Mono
+xterm*faceSize: 12
+xterm*saveLines: 2000
+xterm*foreground: white
+xterm*background: #1e1e1e
+xterm*color1: #eb4129
+xterm*color4: cornflowerblue
+xterm*selectToClipboard: true
+xterm*vt100.translations: #override \
+  Ctrl Shift <Key> C: copy-selection(SELECT) \n\
+  Ctrl <Key> V: insert-selection(SELECT) \n\
+	Ctrl <Key> minus: smaller-vt-font() \n\
+	Ctrl <Key> plus: larger-vt-font() \n\
+	Ctrl <Key> 0: set-vt-font(d)
