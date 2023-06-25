@@ -1,5 +1,12 @@
 [user]
 	name = Diego Alves
 	email = alvessd@live.com
+	signingkey = FB84D5D4A29D25D7
 [core]
 	editor = vim
+[commit]
+	gpgsign = true
+[init]
+	defaultBranch = main
+[gpg]
+	program = gpg
