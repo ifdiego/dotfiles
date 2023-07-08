@@ -29,6 +29,7 @@ set smarttab
 set splitbelow
 set splitright
 set tabstop=4
+set title
 set undodir=~/.vim/undodir
 set undofile
 set wildmenu
@@ -112,3 +113,4 @@ autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "norm
 command W w !sudo tee > /dev/null %
 
 lua require('plugins')
+lua require('lsp')
