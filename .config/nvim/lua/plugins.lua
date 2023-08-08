@@ -22,7 +22,6 @@ return require("packer").startup(function(use)
   use "wakatime/vim-wakatime"
   use "sindrets/diffview.nvim"
   use "onsails/lspkind.nvim"
-  use "preservim/tagbar"
   use "mbbill/undotree"
   use "ellisonleao/gruvbox.nvim"
   use "lukas-reineke/indent-blankline.nvim"
@@ -36,4 +35,5 @@ return require("packer").startup(function(use)
   use "lewis6991/gitsigns.nvim"
   use "rafamadriz/friendly-snippets"
   use "williamboman/mason.nvim"
+  use "williamboman/mason-lspconfig.nvim"
 end)

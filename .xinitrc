@@ -17,5 +17,6 @@ eval $(ssh-agent)
 udiskie &
 copyq &
 flameshot &
+radshift &
 
 exec i3

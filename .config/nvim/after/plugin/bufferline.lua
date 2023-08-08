@@ -1,4 +1,12 @@
 require("bufferline").setup{
+  highlights = {
+    fill = {
+      bg = {
+        attribute = "fg",
+        highlight = "black"
+      }
+    }
+  },
   options = {
     numbers = "buffer_id",
     diagnostics = "nvim_lsp",

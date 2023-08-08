@@ -3,4 +3,8 @@
 #
 
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
-[[ -f ~/.bashrc ]] && . ~/.bashrc
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+
+export PS1='[\u@\h \W]\$ '

@@ -27,8 +27,8 @@ vim.keymap.set("i", "<a-j>", "<esc> :move .+1<cr>==gi")
 vim.keymap.set("i", "<a-k>", "<esc> :move .-2<cr>==gi")
 vim.keymap.set("n", "<a-j>", ":move+<cr>")
 vim.keymap.set("n", "<a-k>", ":move--<cr>")
-vim.keymap.set("x", "<a-j>", ":move '>+1<cr>gv")
-vim.keymap.set("x", "<a-k>", ":move '<-2<cr>gv")
+vim.keymap.set("v", "<a-j>", ":move '>+1<cr>gv=gv")
+vim.keymap.set("v", "<a-k>", ":move '<-2<cr>gv=gv")
 
 -- exit on jj and jk
 vim.keymap.set("i", "jj", "<esc>")
@@ -39,9 +39,7 @@ vim.keymap.set("n", "<esc>", "<cmd>:nohlsearch<cr>:<bs>", { silent = true })
 -- shortcuts using <leader>
 vim.keymap.set("n", "<leader>k", vim.cmd.WhichKey)
 vim.keymap.set("n", "<leader>n", ":bnext<cr>")
-vim.keymap.set("n", "<leader>o", vim.cmd.TagbarToggle)
 vim.keymap.set("n", "<leader>p", ":bprevious<cr>")
-vim.keymap.set("n", "<leader>r", ":set relativenumber!<cr>")
 vim.keymap.set("n", "<leader>s", ":setlocal spell!<cr>")
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 vim.keymap.set("n", "<leader>x", ":bdelete!<cr>")
@@ -70,5 +68,8 @@ vim.keymap.set("t", "<c-l>", "<c-\\><c-n><c-w>l")
 -- better indenting
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
+
+vim.keymap.set("n", "<c-d>", "<c-d>zz")
+vim.keymap.set("n", "<c-u>", "<c-u>zz")
 
 vim.keymap.set("n", "<leader>m", vim.cmd.Mason)

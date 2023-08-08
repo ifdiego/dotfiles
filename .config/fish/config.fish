@@ -12,8 +12,10 @@ fish_add_path /usr/local/bin
 fish_add_path /usr/bin
 fish_add_path $HOME/go/bin
 fish_add_path $HOME/.cargo/bin
+fish_add_path $HOME/.cargo/env
 
 set --global --export hydro_color_pwd green
 
 if status is-interactive
+    export GPG_TTY=$(tty)
 end
