@@ -1,20 +1,3 @@
--- automatically switch to insert mode when entering a Term buffer
-vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter", "TermOpen" }, {
-  group = vim.api.nvim_create_augroup("openTermInsert", {}),
-  callback = function(args)
-    -- we don't use vim.startswith() and look for test:// because of vim-test
-    -- vim-test starts tests in a terminal, which we want to keep in normal mode
-    if vim.endswith(vim.api.nvim_buf_get_name(args.buf), "fish") then
-      vim.cmd("startinsert")
-    end
-  end,
-})
-
--- don"t show number
-vim.api.nvim_create_autocmd("TermOpen", {
-  command = [[setlocal nonumber norelativenumber statusline=%{b:term_title}]],
-})
-
 -- removing trailing whitespace
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*",
@@ -57,3 +40,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank{ timeout=200 }
   end,
 })
+
+-- :W sudo saves the file
+-- (useful for handling the permission-denied error)
+vim.api.nvim_create_user_command("W", "w !sudo tee > /dev/null %", {})

@@ -1,15 +1,17 @@
 require("nvim-treesitter.configs").setup {
   ensure_installed = {
+    "bash",
+    "c",
+    "fish",
     "go",
     "gomod",
-    "lua",
-    "vim",
-    "vimdoc",
-    "bash",
-    "fish",
     "javascript",
+    "lua",
     "python",
     "rust",
+    "typescript",
+    "vim",
+    "vimdoc",
   },
   indent = {
     enable = true

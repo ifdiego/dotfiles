@@ -37,33 +37,17 @@ vim.keymap.set("i", "jk", "<esc>")
 vim.keymap.set("n", "<esc>", "<cmd>:nohlsearch<cr>:<bs>", { silent = true })
 
 -- shortcuts using <leader>
-vim.keymap.set("n", "<leader>k", vim.cmd.WhichKey)
-vim.keymap.set("n", "<leader>n", ":bnext<cr>")
-vim.keymap.set("n", "<leader>p", ":bprevious<cr>")
+vim.keymap.set("n", "<leader>dc", vim.cmd.DiffviewClose)
+vim.keymap.set("n", "<leader>do", vim.cmd.DiffviewFileHistory)
+vim.keymap.set("n", "<leader>e", vim.cmd.NvimTreeToggle)
+vim.keymap.set("n", "<leader>m", vim.cmd.Mason)
+vim.keymap.set("n", "<leader>n", vim.cmd.BufferLineCycleNext)
+vim.keymap.set("n", "<leader>o", vim.cmd.NvimTreeFindFile)
+vim.keymap.set("n", "<leader>p", vim.cmd.BufferLineCyclePrev)
 vim.keymap.set("n", "<leader>s", ":setlocal spell!<cr>")
+vim.keymap.set("n", "<leader>t", vim.cmd.TroubleToggle)
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
-vim.keymap.set("n", "<leader>x", ":bdelete!<cr>")
-
--- toggle fish shell
-vim.keymap.set("n", "<leader>j", ":split term://fish<cr>")
-vim.keymap.set("n", "<leader>v", ":vsplit term://fish<cr>")
-vim.keymap.set("t", "<leader>q", "<c-\\><c-n>:q!<cr>")
-
--- file-tree mapping
-vim.keymap.set("n", "<leader>e", vim.cmd.NvimTreeToggle, { noremap = true })
-
--- diffview
-vim.keymap.set("n", "<leader>do", ":DiffviewFileHistory %<cr>")
-vim.keymap.set("n", "<leader>dc", ":DiffviewClose<cr>")
-
--- trouble
-vim.keymap.set("n", "<leader>t", function() require("trouble").open() end)
-
--- mappings to move out from terminal to other views
-vim.keymap.set("t", "<c-h>", "<c-\\><c-n><c-w>h")
-vim.keymap.set("t", "<c-j>", "<c-\\><c-n><c-w>j")
-vim.keymap.set("t", "<c-k>", "<c-\\><c-n><c-w>k")
-vim.keymap.set("t", "<c-l>", "<c-\\><c-n><c-w>l")
+vim.keymap.set("n", "<leader>x", vim.cmd.bdelete)
 
 -- better indenting
 vim.keymap.set("v", "<", "<gv")
@@ -71,5 +55,11 @@ vim.keymap.set("v", ">", ">gv")
 
 vim.keymap.set("n", "<c-d>", "<c-d>zz")
 vim.keymap.set("n", "<c-u>", "<c-u>zz")
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
 
-vim.keymap.set("n", "<leader>m", vim.cmd.Mason)
+-- force hjkl
+vim.keymap.set("n", "<up>", "<nop")
+vim.keymap.set("n", "<down>", "<nop")
+vim.keymap.set("n", "<left>", "<nop")
+vim.keymap.set("n", "<right>", "<nop")

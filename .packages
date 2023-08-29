@@ -49,6 +49,7 @@ redis
 redshift
 rlwrap
 rsync
+rust
 sqlite
 strace
 thunar
