@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# archlinux installation guide script, not working
+# archlinux installation guide script
 # set keyboard
 loadkeys br-abnt2
 
@@ -98,4 +98,4 @@ wget https://raw.githubusercontent.com/ifdiego/dotfiles/.packages
 sudo pacman -S --needed < .packages
 
 git clone https://github.com/ifdiego/dotfiles.git ~/dotfiles
-bash ~/dotfiles/setup.sh
+bash ~/dotfiles/boostrap.sh
