@@ -28,7 +28,7 @@ require("lazy").setup({
     dependencies = {
       -- useful status updates for lsp
       -- note: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
+      { "j-hui/fidget.nvim", opts = {} },
     },
   },
   -- autocompletion
@@ -72,37 +72,35 @@ require("lazy").setup({
     },
   },
   -- git related plugins
-  {
-    "lewis6991/gitsigns.nvim",
-    opts = {
-      -- see `:help gitsigns.txt`
-      -- signs = {
-      --   add = { text = "+" },
-      --   change = { text = "~" },
-      --   delete = { text = "_" },
-      --   topdelete = { text = "‾" },
-      --   changedelete = { text = "~" },
-      -- },
-    },
-  },
+  { "lewis6991/gitsigns.nvim", opts = {} },
   {
     "sindrets/diffview.nvim",
     opts = {
       use_icons = false,
     },
   },
-  -- colorschemes
-  "blazkowolf/gruber-darker.nvim",
-  "p00f/alabaster.nvim",
+  -- colorscheme
+  {
+    "blazkowolf/gruber-darker.nvim",
+    opts = {
+      italic = {
+        strings = false,
+        comments = false,
+      },
+    },
+  },
   { "windwp/nvim-autopairs", opts = {} },
   { "kylechui/nvim-surround", opts = {} },
   -- "gc" to comment visual regions/lines
   { "numToStr/Comment.nvim", opts = {} },
-  "folke/trouble.nvim",
+  { "folke/trouble.nvim", opts = { icons = false } },
   "wakatime/vim-wakatime",
   -- multi-cursor
   "mg979/vim-visual-multi",
   "rust-lang/rust.vim",
+  -- rust-tools to ride on top of rust_analyzer
+  "simrat39/rust-tools.nvim",
+  "ziglang/zig.vim"
 })
 
 -- settings
@@ -145,7 +143,6 @@ vim.opt.list = false           -- don't show string above by default
 vim.opt.pumheight = 5          -- popup menu height
 vim.opt.wildmode = "longest,list"  -- complete files like a shell
 
-vim.opt.laststatus = 3             -- global statusline
 vim.opt.timeoutlen = 500           -- by default timeoutlen is 1000ms
 vim.opt.updatetime = 300           -- faster completion
 vim.opt.foldmethod = "expr"        -- define fold method
@@ -155,7 +152,7 @@ vim.opt.foldenable = false         -- don't fold text by default when opening fi
 vim.opt.cursorline = true          -- highlight the current line
 vim.opt.cursorlineopt = "number"   -- but only the humbers
 
-vim.cmd.colorscheme "alabaster"
+vim.cmd.colorscheme "gruber-darker"
 
 -- keymaps for better default experience
 -- see `:help vim.keymap.set()`
@@ -218,14 +215,6 @@ vim.keymap.set("t", "<c-l>", "<c-\\><c-n><c-w>l")
 -- remain in visual mode after indenting
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
-
--- search matches in the middle of screen
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
-
--- center the view after jumping up/down
-vim.keymap.set("n", "<c-u>", "<c-u>zz")
-vim.keymap.set("n", "<c-d>", "<c-d>zz")
 
 -- automatically switch to insert mode when entering a term buffer
 vim.api.nvim_command("autocmd TermOpen,BufEnter term://* startinsert")
@@ -314,18 +303,10 @@ require("telescope").setup {
         diff_context_lines = vim.o.scrolloff,
         entry_format = "state #$ID, $STAT, $TIME",
         time_format = "",
-        saved_only = false,
+        saved_only = true,
       },
       file_browser = {
         theme = "ivy",
-        -- mappings = {
-        --   ["i"] = {
-        --     -- your custom insert mode mappings
-        --   },
-        --   ["n"] = {
-        --     -- your custom normal mode mappings
-        --   },
-        -- },
       },
     },
   },
@@ -372,6 +353,7 @@ require("nvim-treesitter.configs").setup {
     "typescript",
     "vim",
     "vimdoc",
+    "zig",
   },
   highlight = {
     enable = true, -- false will disable the whole extension
@@ -544,6 +526,19 @@ lspconfig.rust_analyzer.setup {
 lspconfig.tsserver.setup {
   on_attach = on_attach,
   capabilities = capabilities,
+}
+
+lspconfig.zls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    zls = {
+      enable_inlay_hints = true,
+      inlay_hints_show_builtin = true,
+      include_at_in_builtins = true,
+      warn_style = true,
+    },
+  },
 }
 
 -- configure nvim-cmp

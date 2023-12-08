@@ -56,6 +56,7 @@ mkcert
 mpv
 mupdf
 nasm
+ncdu
 neofetch
 neovim
 net-tools
@@ -91,6 +92,7 @@ tig
 thunar
 tmux
 traceroute
+transmission-cli
 transmission-gtk
 tree
 ttf-dejavu
@@ -108,7 +110,8 @@ weechat
 xbindkeys
 xclip
 xdg-user-dirs
-xf86-video-intel
 xorg
 xorg-xinit
+zig
+zls
 zstd

@@ -30,7 +30,7 @@ set -g __fish_git_prompt_char_conflictedstate "+"
 set -g __fish_git_prompt_color_dirtystate yellow
 set -g __fish_git_prompt_color_cleanstate green --bold
 set -g __fish_git_prompt_color_invalidstate red
-set -g __fish_git_prompt_color_branch blue
+set -g __fish_git_prompt_color_branch brred #blue
 
 if status is-interactive
     export GPG_TTY=$(tty)
