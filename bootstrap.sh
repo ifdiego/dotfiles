@@ -2,29 +2,25 @@
 
 echo "[INFO] Checking /home/$(whoami)/ links"
 
-homefiles=`find . -maxdepth 1 -type f -not -path "*.sh"`
+homefiles=$(find . -maxdepth 1 -type f -not -path "*.sh")
 for file in $homefiles; do
-    ln -i -s ~/dotfiles/$file ~/$file
+    ln -i -s ~/dotfiles/"$file" ~/"$file"
 done
 
 echo "[INFO] Checking .config files"
 
-configfiles=`find .config/ -type f`
+configfiles=$(find .config/ -type f)
 for file in $configfiles; do
-    ln -i -s ~/dotfiles/$file ~/$file
+    ln -i -s ~/dotfiles/"$file" ~/"$file"
 done
 
-if [ -d "${HOME}/.ssh" ]; then
-    echo "[INFO] ~/.ssh exists"
-else
+if [ ! -d "${HOME}/.ssh" ]; then
     echo "[INFO] Creating /home/$(whoami)/.ssh"
     mkdir -p ~/.ssh
     ln -i -s ~/dotfiles/.ssh/config ~/.ssh/config
 fi
 
-if [ -d "${HOME}/.gnupg" ]; then
-    echo "[INFO] ~/.gnupg exists"
-else
+if [ ! -d "${HOME}/.gnupg" ]; then
     echo "[INFO] Creating /home/$(whoami)/.gnupg"
     mkdir -p ~/.gnupg
     ln -i -s ~/dotfiles/.gnupg/gpg.conf ~/.gnupg/gpg.conf
@@ -38,6 +34,8 @@ nvim +PackerSync
 
 sudo systemctl start docker.service
 sudo systemctl enable docker.service
-sudo usermod -aG docker $USER
+sudo usermod -aG docker "$USER"
+
+rustup default stable
 
 xdg-user-dirs-update

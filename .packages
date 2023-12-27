@@ -2,6 +2,7 @@ alacritty
 antlr4
 ascii
 base-devel
+bat
 bcc
 binaryen
 bind
@@ -22,6 +23,7 @@ dmenu
 docker
 docker-compose
 emscripten
+fd
 feh
 ffmpeg
 firefox
@@ -44,6 +46,7 @@ i3lock
 i3status
 imagemagick
 jq
+lf
 lldb
 llvm
 lsof
@@ -67,6 +70,7 @@ nodejs
 npm
 openssh
 pavucontrol
+pcmanfm-gtk3
 peek
 perf
 protobuf
@@ -76,20 +80,18 @@ pyright
 python-pip
 qemu
 rabbitmq
-ranger
 re2c
 redis
 redshift
 ripgrep
 rlwrap
 rsync
-rust
+rustup
 rust-analyzer
 shellcheck
 sqlite
 strace
 tig
-thunar
 tmux
 traceroute
 transmission-cli
