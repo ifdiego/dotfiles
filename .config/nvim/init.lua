@@ -1,13 +1,3 @@
--- in general, it's a good idea to set this early in your config, because otherwise
--- if you have any mappings you set BEFORE doing this, they will be set to the OLD leader.
--- see `:help mapleader`
-vim.g.mapleader = ","
-
--- set loaded_matchparen here to `1` to disable parenthesis highlighting
-vim.g.loaded_matchparen = 1
-
--- install package manager
--- `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -21,33 +11,21 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.g.mapleader = ","
+
 require("lazy").setup({
-  -- lsp configuration & plugins
-  {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      -- useful status updates for lsp
-      -- note: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { "j-hui/fidget.nvim", opts = {} },
-    },
-  },
-  -- autocompletion
+  "neovim/nvim-lspconfig",
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
-      -- adds lsp completion capabilities
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      -- snippet engine & its associated nvim-cmp source
       "saadparwaiz1/cmp_luasnip",
       "L3MON4D3/LuaSnip",
-      -- adds a number of user-friendly snippets
       "rafamadriz/friendly-snippets",
     },
   },
-  -- treesitter
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
@@ -57,7 +35,6 @@ require("lazy").setup({
     },
     build = ":TSUpdate",
   },
-  -- telescope
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
@@ -71,15 +48,8 @@ require("lazy").setup({
       "debugloop/telescope-undo.nvim",
     },
   },
-  -- git related plugins
   { "lewis6991/gitsigns.nvim", opts = {} },
-  {
-    "sindrets/diffview.nvim",
-    opts = {
-      use_icons = false,
-    },
-  },
-  -- colorscheme
+  { "sindrets/diffview.nvim", opts = { use_icons = false } },
   {
     "blazkowolf/gruber-darker.nvim",
     opts = {
@@ -91,24 +61,13 @@ require("lazy").setup({
   },
   { "windwp/nvim-autopairs", opts = {} },
   { "kylechui/nvim-surround", opts = {} },
-  -- "gc" to comment visual regions/lines
   { "numToStr/Comment.nvim", opts = {} },
   { "folke/trouble.nvim", opts = { icons = false } },
-  "wakatime/vim-wakatime",
-  -- multi-cursor
   "mg979/vim-visual-multi",
   "rust-lang/rust.vim",
-  -- rust-tools to ride on top of rust_analyzer
   "simrat39/rust-tools.nvim",
-  "ziglang/zig.vim"
+  "ziglang/zig.vim",
 })
-
--- settings
--- see `:help vim.o`
-
--- disable netrw at the very start of init.lua
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 
 vim.opt.termguicolors = true -- enable 24-bit RGB colors
 
@@ -132,14 +91,14 @@ vim.opt.undodir = vim.fn.stdpath("data") .. "undo"
 vim.opt.expandtab = true  -- expand tabs into spaces
 vim.opt.shiftwidth = 4    -- number of spaces to use for each step of indent
 vim.opt.tabstop = 4       -- number of spaces a TAB counts for
-vim.opt.scrolloff = 5   -- don't touch top/bottom except its EOF
+vim.opt.scrolloff = 3     -- don't touch top/bottom except its EOF
 vim.opt.autoindent = true -- automatically indent when starting a new line
 vim.opt.wrap = false      -- display long lines as just one line
 
 vim.opt.hidden = true          -- current buffer can be put into background
 vim.opt.backup = false         -- don't use backup files
-vim.opt.listchars = "tab:→ ,eol:¬,trail:⋅,extends:❯,precedes:❮"  -- strings for list mode
-vim.opt.list = false           -- don't show string above by default
+vim.opt.listchars = "tab:| ,trail:⋅,extends:>,precedes:<"  -- strings for list mode
+vim.opt.list = true            -- don't show string above by default
 vim.opt.pumheight = 5          -- popup menu height
 vim.opt.wildmode = "longest,list"  -- complete files like a shell
 
@@ -154,9 +113,6 @@ vim.opt.cursorlineopt = "number"   -- but only the humbers
 
 vim.cmd.colorscheme "gruber-darker"
 
--- keymaps for better default experience
--- see `:help vim.keymap.set()`
-
 -- fast saving
 vim.keymap.set("n", "<leader>w", ":write!<cr>")
 vim.keymap.set("n", "<leader>q", ":quit!<cr>", { silent = true })
@@ -165,10 +121,10 @@ vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
 
 -- better split switching
-vim.keymap.set("n", "<c-h>", "<c-w>h")
-vim.keymap.set("n", "<c-j>", "<c-w>j")
-vim.keymap.set("n", "<c-k>", "<c-w>k")
-vim.keymap.set("n", "<c-l>", "<c-w>l")
+vim.keymap.set("n", "<c-h>", ":wincmd h<cr>")
+vim.keymap.set("n", "<c-j>", ":wincmd j<cr>")
+vim.keymap.set("n", "<c-k>", ":wincmd k<cr>")
+vim.keymap.set("n", "<c-l>", ":wincmd l<cr>")
 
 -- panes resizing
 vim.keymap.set("n", "<c-s-left>", ":vertical resize +1<cr>", { silent = true })
@@ -184,41 +140,20 @@ vim.keymap.set("n", "<a-k>", ":move--<cr>")
 vim.keymap.set("v", "<a-j>", ":move '>+1<cr>gv=gv")
 vim.keymap.set("v", "<a-k>", ":move '<-2<cr>gv=gv")
 
--- exit on jj and jk
-vim.keymap.set("i", "jj", "<esc>")
-vim.keymap.set("i", "jk", "<esc>")
-
 vim.keymap.set("n", "<esc>", vim.cmd.nohlsearch, { silent = true })
 
 -- shortcuts using <leader>
-vim.keymap.set("n", "<leader>c", "<cmd>setlocal list!<cr>")
 vim.keymap.set("n", "<leader>hc", vim.cmd.DiffviewClose)
 vim.keymap.set("n", "<leader>ho", vim.cmd.DiffviewFileHistory)
 vim.keymap.set("n", "<leader>i", vim.cmd.InspectTree)
 vim.keymap.set("n", "<leader>n", vim.cmd.bnext)
 vim.keymap.set("n", "<leader>p", vim.cmd.bprevious)
-vim.keymap.set("n", "<leader>s", "<cmd>setlocal spell!<cr>")
 vim.keymap.set("n", "<leader>t", vim.cmd.TroubleToggle)
 vim.keymap.set("n", "<leader>x", vim.cmd.bdelete)
-
--- toggle fish shell
-vim.keymap.set("n", "<leader>j", ":20split term://fish<cr>")
-vim.keymap.set("n", "<leader>v", ":vsplit term://fish<cr>")
-vim.keymap.set("t", "<leader>q", "<c-\\><c-n>:q!<cr>")
-
--- mappings to move out from terminal to other views
-vim.keymap.set("t", "<c-h>", "<c-\\><c-n><c-w>h")
-vim.keymap.set("t", "<c-j>", "<c-\\><c-n><c-w>j")
-vim.keymap.set("t", "<c-k>", "<c-\\><c-n><c-w>k")
-vim.keymap.set("t", "<c-l>", "<c-\\><c-n><c-w>l")
 
 -- remain in visual mode after indenting
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
-
--- automatically switch to insert mode when entering a term buffer
-vim.api.nvim_command("autocmd TermOpen,BufEnter term://* startinsert")
-vim.api.nvim_command("autocmd TermOpen * setlocal nonumber norelativenumber")
 
 -- removing trailing whitespace
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -256,26 +191,16 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
--- :W sudo saves the file
--- (useful for handling the permission-denied error)
-vim.api.nvim_create_user_command("W", "w !sudo tee > /dev/null %", {})
-
--- set statusline
 Statusline = function()
   return table.concat {
-    "%#statusline#",
     "%F",
     "%h%w%m%r",
     "%=",
-    -- "%-14.(%P (%l,%c)%)%L",
     "%-14.(%l,%c%V%) %P",
   }
 end
-
 vim.opt.statusline = "%!v:lua.Statusline()"
 
--- configure telescope
--- see `:help telescope` and `:help telescope.setup()`
 local actions = require("telescope.actions")
 local builtin = require("telescope.builtin")
 
@@ -290,24 +215,12 @@ require("telescope").setup {
       },
     },
     extensions = {
-      fzf = {
-        fuzzy = true,                    -- false will only do exact matching
-        override_generic_sorter = true,  -- override the generic sorter
-        override_file_sorter = true,     -- override the file sorter
-        case_mode = "smart_case",        -- or "ignore_case" or "respect_case",  the default case_mode is "smart_case"
-      },
+      fzf = {},
       undo = {
-        use_delta = true,
-        use_custom_command = nil, -- setting this implies `use_delta = false`. Accepted format is: { "bash", "-c", "echo '$DIFF' | delta" }
-        side_by_side = false,
-        diff_context_lines = vim.o.scrolloff,
-        entry_format = "state #$ID, $STAT, $TIME",
-        time_format = "",
         saved_only = true,
       },
-      file_browser = {
-        theme = "ivy",
-      },
+      live_grep_args = {},
+      file_browser = {},
     },
   },
 }
@@ -333,8 +246,6 @@ require("telescope").load_extension("undo")
 require("telescope").load_extension("live_grep_args")
 require("telescope").load_extension("file_browser")
 
--- configure treesitter
--- see `:help nvim-treesitter`
 require("nvim-treesitter.configs").setup {
   ensure_installed = {
     "bash",
@@ -364,10 +275,10 @@ require("nvim-treesitter.configs").setup {
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = "<c-space>", -- maps in normal mode to init the node/scope selection with space
-      node_incremental = "<c-space>", -- increment to the upper named parent
-      node_decremental = "<bs>", -- decrement to the previous node
-      scope_incremental = "<tab>", -- increment to the upper scope (as defined in locals.scm)
+      init_selection = "gnn", -- set to `false` to disable one of the mappings
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
     },
   },
   textobjects = {
@@ -380,33 +291,42 @@ require("nvim-treesitter.configs").setup {
         ["ia"] = "@parameter.inner",
         ["af"] = "@function.outer",
         ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner",
-        ["ii"] = "@conditional.inner",
-        ["ai"] = "@conditional.outer",
-        ["il"] = "@loop.inner",
+        ["ac"] = "@conditional.outer",
+        ["ic"] = "@conditional.inner",
         ["al"] = "@loop.outer",
-        ["at"] = "@comment.outer",
+        ["il"] = "@loop.inner",
       },
     },
     move = {
       enable = true,
       set_jumps = true, -- whether to set jumps in the jumplist
       goto_next_start = {
-        ["]m"] = "@function.outer",
+        ["]f"] = "@function.outer",
         ["]]"] = "@class.outer",
+        ["]a"] = "@parameter.outer",
+        ["]c"] = "@conditional.outer",
+        ["]l"] = "@loop.outer",
       },
       goto_next_end = {
-        ["]M"] = "@function.outer",
+        ["]F"] = "@function.outer",
         ["]["] = "@class.outer",
+        ["]A"] = "@parameter.outer",
+        ["]C"] = "@conditional.outer",
+        ["]L"] = "@loop.outer",
       },
       goto_previous_start = {
-        ["[m"] = "@function.outer",
-        ["[["] = "@class.outer",
+        ["[f"] = "@function.outer",
+        ["[]"] = "@class.outer",
+        ["[a"] = "@parameter.outer",
+        ["[c"] = "@conditional.outer",
+        ["[l"] = "@loop.outer",
       },
       goto_previous_end = {
-        ["[M"] = "@function.outer",
-        ["[]"] = "@class.outer",
+        ["[F"] = "@function.outer",
+        ["[["] = "@class.outer",
+        ["[A"] = "@parameter.outer",
+        ["[C"] = "@conditional.outer",
+        ["[L"] = "@loop.outer",
       },
     },
     swap = {
@@ -415,13 +335,12 @@ require("nvim-treesitter.configs").setup {
         ["<leader>a"] = "@parameter.inner",
       },
       swap_previous = {
-        ["<leader>b"] = "@parameter.inner",
+        ["<leader>A"] = "@parameter.inner",
       },
     },
   },
 }
 
--- LSP settings
 local lspconfig = require("lspconfig")
 
 -- use an on_attach function to only map the following keys
@@ -541,8 +460,6 @@ lspconfig.zls.setup {
   },
 }
 
--- configure nvim-cmp
--- see `:help cmp`
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
@@ -564,30 +481,11 @@ cmp.setup({
     ["<c-space>"] = cmp.mapping.complete(),
     ["<c-e>"] = cmp.mapping.abort(),
     ["<cr>"] = cmp.mapping.confirm({ select = true }),
-    ["<tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-    ["<s-tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
   }),
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
     { name = "luasnip" },
     { name = "path" },
     { name = "buffer" },
-    { name = "nvim_lsp_signature_help" },
   }),
 })

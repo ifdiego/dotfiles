@@ -1,0 +1,42 @@
+live_config_reload = true
+
+[env]
+TERM = "xterm-256color"
+
+[window]
+dynamic_padding = true
+
+[scrolling]
+history = 100000
+
+[font]
+size = 7.0
+
+[font.normal]
+family = "JetBrains Mono"
+style = "Regular"
+
+[font.bold]
+family = "JetBrains Mono"
+style = "Bold"
+
+[font.italic]
+family = "JetBrains Mono"
+style = "Italic"
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[selection]
+save_to_clipboard = true
+
+[mouse]
+hide_when_typing = true
+
+[[hints.enabled]]
+regex = """(ipfs:|ipns:|magent:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
+    [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"""
+hyperlinks = true
+command = "xdg-open"
+post_processing = true
+mouse.enabled = true

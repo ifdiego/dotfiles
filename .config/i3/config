@@ -193,7 +193,7 @@ bar {
 exec --no-startup-id xsetroot -solid "#000000"
 
 # custom keybindings
-bindsym $mod+i exec firefox
+bindsym $mod+b exec firefox
 bindsym $mod+p exec copyq show
 bindsym Print exec flameshot gui
 bindsym Control+$mod+l exec i3lock -c 000000
