@@ -10,18 +10,18 @@ dynamic_padding = true
 history = 100000
 
 [font]
-size = 7.0
+size = 7.5
 
 [font.normal]
-family = "JetBrains Mono"
+family = "Hack"
 style = "Regular"
 
 [font.bold]
-family = "JetBrains Mono"
+family = "Hack"
 style = "Bold"
 
 [font.italic]
-family = "JetBrains Mono"
+family = "Hack"
 style = "Italic"
 
 [colors]

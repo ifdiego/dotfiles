@@ -14,21 +14,21 @@ general {
 order += "ipv6"
 order += "wireless _first_"
 order += "ethernet _first_"
+order += "volume master"
 order += "battery all"
 order += "disk /"
 order += "load"
 order += "memory"
-order += "volume master"
 order += "tztime local"
 
 wireless _first_ {
-        format_up = "W: (%quality at %essid, %bitrate) %ip"
-        format_down = "W: down"
+        format_up = "WIFI: (%quality at %essid, %bitrate) %ip"
+        format_down = "WIFI: down"
 }
 
 ethernet _first_ {
-        format_up = "E: %ip (%speed)"
-        format_down = "E: down"
+        format_up = "ETH: %ip (%speed)"
+        format_down = "ETH: down"
 }
 
 battery all {
@@ -55,8 +55,5 @@ tztime local {
 
 volume master {
         format = "VOL: %volume"
-        format_muted = "VOL: muted"
         device = "default"
-        mixer = "Master"
-        mixer_idx = 0
 }

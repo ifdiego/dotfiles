@@ -50,7 +50,6 @@ lf
 lldb
 llvm
 lsof
-lua-language-server
 man-pages
 memcached
 meson
@@ -76,7 +75,6 @@ perf
 protobuf
 psensor
 pulseaudio
-pyright
 python-pip
 qemu
 rabbitmq
@@ -100,8 +98,6 @@ tree
 ttf-dejavu
 ttf-jetbrains-mono
 ttf-jetbrains-mono-nerd
-typescript
-typescript-language-server
 udiskie
 unclutter
 unrar
