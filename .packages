@@ -89,6 +89,7 @@ rust-analyzer
 shellcheck
 sqlite
 strace
+stow
 tig
 tmux
 traceroute
@@ -96,8 +97,8 @@ transmission-cli
 transmission-gtk
 tree
 ttf-dejavu
-ttf-jetbrains-mono
-ttf-jetbrains-mono-nerd
+ttf-hack
+ttf-hack-nerd
 udiskie
 unclutter
 unrar
