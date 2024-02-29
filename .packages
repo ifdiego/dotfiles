@@ -78,6 +78,7 @@ pulseaudio
 python-pip
 qemu
 rabbitmq
+ranger
 re2c
 redis
 redshift
@@ -96,9 +97,7 @@ traceroute
 transmission-cli
 transmission-gtk
 tree
-ttf-dejavu
-ttf-hack
-ttf-hack-nerd
+ttf-droid
 udiskie
 unclutter
 unrar

@@ -1,7 +1,6 @@
-function fish_prompt --description 'write out the prompt'
-    set_color green --bold
-    printf '%s' (prompt_pwd)
-    set_color blue
-    printf '%s ' (__fish_git_prompt)
+function fish_prompt
+    set_color green
+    printf '%s' (basename $PWD)
     set_color normal
+    printf '%s' (__fish_git_prompt) ' $ '
 end
