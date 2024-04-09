@@ -1,31 +1,30 @@
+# Colors (Alabaster Dark)
+# author tonsky
+
 [colors.primary]
-background = "0x0e1415"
-foreground = "0xcecece"
+background = '0x0e1415'
+foreground = '0xcecece'
 
 [colors.cursor]
-text = "0x0e1415"
-cursor = "0xcd974b"
-
-[colors.selection]
-text = "0x000000"
-background = "0x293334"
+text = '0x0e1415'
+cursor = '0xcecece'
 
 [colors.normal]
-black = "0x000000"
-red = "0xd2322d"
-green = "0x6abf40"
-yellow = "0xcd974b"
-blue = "0x217EBC"
-magenta = "0x9B3596"
-cyan = "0x178F79"
-white = "0xcecece"
+black = '0x0e1415'
+red = '0xe25d56'
+green = '0x73ca50'
+yellow = '0xe9bf57'
+blue = '0x4a88e4'
+magenta = '0x915caf'
+cyan = '0x23acdd'
+white = '0xf0f0f0'
 
 [colors.bright]
-black = "0x333333"
-red = "0xc33c33"
-green = "0x95cb82"
-yellow = "0xdfdf8e"
-blue = "0x71aed7"
-magenta = "0xcc8bc9"
-cyan = "0x47BEA9"
-white = "0xffffff"
+black = '0x777777'
+red = '0xf36868'
+green = '0x88db3f'
+yellow = '0xf0bf7a'
+blue = '0x6f8fdb'
+magenta = '0xe987e9'
+cyan = '0x4ac9e2'
+white = '0xffffff'

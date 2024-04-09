@@ -50,6 +50,7 @@ tiling_drag modifier titlebar
 
 # start a terminal
 bindsym $mod+Return exec alacritty
+# bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -187,8 +188,6 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
-        position top
-        separator_symbol "|"
 }
 
 exec --no-startup-id xsetroot -solid "#000000"
@@ -200,6 +199,8 @@ bindsym Print exec flameshot gui
 bindsym Control+$mod+l exec i3lock -c 000000
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+n bar mode toggle
 
 focus_follows_mouse no
 hide_edge_borders both

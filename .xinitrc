@@ -4,7 +4,7 @@
 
 xset r rate 300 80
 xset -b
-setxkbmap -option caps:swapescape
+setxkbmap -option "ctrl:nocaps"
 
 eval $(ssh-agent)
 
