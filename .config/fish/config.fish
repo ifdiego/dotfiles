@@ -1,6 +1,7 @@
 abbr --add gs git status
 abbr --add n $EDITOR
 abbr --add temp pushd (mktemp -d)
+abbr --add ll ls -lh
 
 set fish_greeting
 
@@ -8,7 +9,6 @@ set --global --export EDITOR nvim
 set --global --export GOPATH (go env GOPATH)
 set --global --export CARGO_HOME $HOME/.cargo
 set --global --export GPG_TTY (tty)
-set --global --export MANPAGER less -X
 
 set fzf_directory_opts --bind "ctrl-o:execute($EDITOR {} &> /dev/tty)"
 

@@ -3,7 +3,7 @@
 	email = alvessd@live.com
 	signingkey = FB84D5D4A29D25D7
 [core]
-	editor = vim
+	editor = nvim
 [commit]
 	gpgsign = true
 [init]
