@@ -1,5 +1,4 @@
 live_config_reload = true
-import = ["~/.config/alacritty/theme.toml"]
 
 [env]
 TERM = "xterm-256color"
@@ -16,6 +15,35 @@ offset = { x = 0, y = 1 }
 
 [font.normal]
 family = "Hack"
+style = "Regular"
+
+[colors.primary]
+background = '0x0e1415'
+foreground = '0xcecece'
+
+[colors.cursor]
+text = '0x0e1415'
+cursor = '0xcecece'
+
+[colors.normal]
+black = '0x0e1415'
+red = '0xe25d56'
+green = '0x73ca50'
+yellow = '0xe9bf57'
+blue = '0x4a88e4'
+magenta = '0x915caf'
+cyan = '0x23acdd'
+white = '0xf0f0f0'
+
+[colors.bright]
+black = '0x777777'
+red = '0xf36868'
+green = '0x88db3f'
+yellow = '0xf0bf7a'
+blue = '0x6f8fdb'
+magenta = '0xe987e9'
+cyan = '0x4ac9e2'
+white = '0xffffff'
 
 [selection]
 save_to_clipboard = true
