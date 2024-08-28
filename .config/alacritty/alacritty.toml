@@ -13,10 +13,6 @@ history = 100000
 size = 7.5
 offset = { x = 0, y = 1 }
 
-[font.normal]
-family = "Hack"
-style = "Regular"
-
 [colors.primary]
 background = '0x0e1415'
 foreground = '0xcecece'
