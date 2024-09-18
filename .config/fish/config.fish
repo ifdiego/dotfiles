@@ -1,22 +1,21 @@
-abbr --add gs git status
-abbr --add n $EDITOR
-abbr --add temp pushd (mktemp -d)
-abbr --add ll ls -lh
-
 set fish_greeting
 
-set --global --export EDITOR nvim
-set --global --export GOPATH (go env GOPATH)
-set --global --export CARGO_HOME $HOME/.cargo
 set --global --export GPG_TTY (tty)
+set --global --export MANPAGER less -F -X -R
 
-set fzf_directory_opts --bind "ctrl-o:execute($EDITOR {} &> /dev/tty)"
+fish_default_key_bindings
 
-fish_add_path $GOPATH/bin
-fish_add_path $CARGO_HOME/bin
+abbr --add gs "git status"
+abbr --add gd "git diff"
+abbr --add vim "nvim"
+abbr --add temp "pushd (mktemp -d)"
+abbr --add l "eza --long --sort date --reverse --color never"
+abbr --add tree "eza --tree --color never"
 
-# fish integration for direnv
-direnv hook fish | source
+fish_add_path (go env GOPATH)/bin
+fish_add_path ~/.cargo/bin
+
+zoxide init fish | source
 
 # start x at login
 if status is-login
