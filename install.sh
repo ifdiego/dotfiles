@@ -2,7 +2,8 @@
 
 sudo pacman -S git
 git clone https://github.com/ifdiego/dotfiles.git ~/dotfiles
-sudo pacman -S --needed - < ~/dotfiles/.packages
+
+cat ~/dotfiles/packages | sudo pacman -S --needed -
 cd ~/dotfiles
 stow .
 
@@ -15,7 +16,12 @@ sudo systemctl start docker.service
 sudo systemctl enable docker.service
 sudo usermod -aG docker "$USER"
 
-git remote set-url origin git@github.com:ifdiego/dotfiles.git
-
 rustup default stable
+mkdir -p .cargo/bin
+
+go install golang.org/x/tools/gopls@latest
+rustup component add rust-analyzer
+ln -s "$(rustup which rust-analyzer)" ~/.cargo/bin/rust-analyzer
+
+git remote set-url origin git@github.com:ifdiego/dotfiles.git
 xdg-user-dirs-update
