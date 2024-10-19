@@ -16,6 +16,18 @@ sudo systemctl start docker.service
 sudo systemctl enable docker.service
 sudo usermod -aG docker "$USER"
 
+chmod 700 ~/.ssh
+curl https://github.com/ifdiego.keys -o ~/.ssh/id_rsa.pub
+ssh-add ~/.ssh/id_rsa
+ssh -T git@github.com
+
+chmod 700 ~/.gnupg
+# gpg --export --armor > public.asc
+gpg --import public.asc
+# gpg --export-secret-keys --armor > private.asc
+gpg --import private.asc
+gpg --list-secret-keys --keyid-format=long
+
 rustup default stable
 mkdir -p .cargo/bin
 
