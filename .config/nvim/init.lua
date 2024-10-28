@@ -61,15 +61,13 @@ vim.keymap.set("n", "<leader>fg", fzf.live_grep)
 vim.keymap.set("n", "<leader>fb", fzf.buffers)
 vim.keymap.set("n", "<leader>fh", fzf.helptags)
 
--- list of compatible language servers is here:
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 local lspconfig = require "lspconfig"
 lspconfig.clangd.setup {}
 lspconfig.lua_ls.setup {}
 lspconfig.gopls.setup {}
 lspconfig.pyright.setup {}
 lspconfig.rust_analyzer.setup {}
-lspconfig.tsserver.setup {}
+lspconfig.ts_ls.setup {}
 lspconfig.zls.setup {}
 
 -- use LspAttach autocommand to only map the following keys
@@ -101,9 +99,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
             vim.lsp.buf.format { async = true }
         end, opts)
         vim.keymap.set("n", "<space>q", vim.diagnostic.setqflist)
-        vim.keymap.set("n", "<space>tt", function()
-            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-        end, opts)
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
     end,
 })
 
