@@ -2,7 +2,7 @@
 
 [[ -e ~/.xprofile ]] && . ~/.xprofile
 
-xset r rate 300 80
+xset r rate 200 70
 xset -b
 setxkbmap -option "ctrl:nocaps"
 
