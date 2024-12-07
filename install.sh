@@ -4,8 +4,7 @@ sudo pacman -S git
 git clone https://github.com/ifdiego/dotfiles.git ~/dotfiles
 
 cat ~/dotfiles/packages | sudo pacman -S --needed -
-cd ~/dotfiles
-stow .
+stow -d ~/dotfiles -t ~ .
 
 # sudo cp ~/.etc/10-keyboard.conf /etc/X11/xorg.conf.d/10-keyboard.conf
 sudo cp ~/.etc/30-touchpad.conf /etc/X11/xorg.conf.d/30-touchpad.conf
@@ -22,14 +21,12 @@ ssh-add ~/.ssh/id_rsa
 ssh -T git@github.com
 
 chmod 700 ~/.gnupg
-# gpg --export --armor > public.asc
-gpg --import public.asc
-# gpg --export-secret-keys --armor > private.asc
-gpg --import private.asc
+gpg --import public.asc # gpg --export --armor > public.asc
+gpg --import private.asc # gpg --export-secret-keys --armor > private.asc
 gpg --list-secret-keys --keyid-format=long
 
 rustup default stable
-mkdir -p .cargo/bin
+mkdir -p ~/.cargo/bin
 
 go install golang.org/x/tools/gopls@latest
 rustup component add rust-analyzer

@@ -9,11 +9,13 @@ copyq
 croc
 curl
 delve
+difftastic
 dmenu
 docker
 docker-compose
 duf
 eza
+fastfetch
 fd
 feh
 ffmpeg
@@ -74,6 +76,7 @@ xclip
 xdg-user-dirs
 xorg-xinit
 xorg-xrandr
+yazi
 zig
 zip
 zls
