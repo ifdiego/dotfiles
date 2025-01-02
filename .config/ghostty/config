@@ -1,0 +1,7 @@
+# disable ligatures
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
+
+# use simple titlebar
+gtk-titlebar = false

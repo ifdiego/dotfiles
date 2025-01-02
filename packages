@@ -1,4 +1,3 @@
-alacritty
 bat
 brightnessctl
 btop
@@ -14,6 +13,7 @@ dmenu
 docker
 docker-compose
 duf
+entr
 eza
 fastfetch
 fd
@@ -24,8 +24,10 @@ fish
 flameshot
 fzf
 gdb
+ghostty
 git
 github-cli
+glow
 go
 htop
 hyperfine
@@ -39,7 +41,6 @@ lsof
 lua-language-server
 man-db
 man-pages
-mdcat
 mpv
 mupdf
 ncdu
@@ -75,6 +76,7 @@ wget
 xclip
 xdg-user-dirs
 xorg-xinit
+xorg-xinput
 xorg-xrandr
 yazi
 zig
