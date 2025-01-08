@@ -3,5 +3,7 @@ font-feature = -calt
 font-feature = -liga
 font-feature = -dlig
 
+gtk-adwaita = false
+
 # use simple titlebar
 gtk-titlebar = false
