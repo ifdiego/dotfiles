@@ -99,7 +99,6 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
-
 workspace_layout tabbed
 
 # toggle tiling / floating
@@ -189,15 +188,27 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+        position top
+        separator_symbol " "
 }
 
-bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5%+
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 
-bindsym $mod+p exec copyq show
+bindsym $mod+Shift+period exec --no-startup-id systemctl poweroff
 bindsym $mod+i exec i3lock
-bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+p exec copyq show
 bindsym Print exec flameshot gui
 
+exec_always --no-startup-id xset r rate 200 70
+exec_always --no-startup-id setxkbmap -option "ctrl:nocaps"
+
+exec --no-startup-id copyq
+exec --no-startup-id flameshot
+exec --no-startup-id redshift
+exec --no-startup-id udiskie
+
+default_border pixel 0
 focus_follows_mouse no
 hide_edge_borders both
+workspace_auto_back_and_forth yes

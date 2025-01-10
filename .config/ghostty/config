@@ -1,9 +1,6 @@
-# disable ligatures
 font-feature = -calt
 font-feature = -liga
 font-feature = -dlig
-
-gtk-adwaita = false
-
-# use simple titlebar
+mouse-hide-while-typing = true
 gtk-titlebar = false
+gtk-adwaita = false
