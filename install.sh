@@ -29,6 +29,7 @@ rustup default stable
 mkdir -p ~/.cargo/bin
 
 go install golang.org/x/tools/gopls@latest
+go install github.com/joshmedeski/sesh@latest
 rustup component add rust-analyzer
 ln -s "$(rustup which rust-analyzer)" ~/.cargo/bin/rust-analyzer
 
