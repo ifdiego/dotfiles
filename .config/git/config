@@ -1,12 +1,15 @@
 [user]
 	name = Diego Alves
 	email = alvessd@live.com
-	signingkey = FB84D5D4A29D25D7
+	signingKey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIESA+dSgDxCqTQ16Z/gHOUrPKuw2//elfTBHVlsxZJKy alvessd@live.com
 [core]
 	editor = nvim
+	pager = delta
 [commit]
 	gpgsign = true
 [init]
 	defaultBranch = main
 [gpg]
-	program = gpg
+	format = ssh
+[delta]
+	navigate = true
