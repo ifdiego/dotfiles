@@ -3,7 +3,12 @@ abbr --add gd "git diff"
 abbr --add vim "nvim"
 abbr --add temp "pushd (mktemp -d)"
 abbr --add tree "eza --tree --color=never"
+abbr --add ls "eza"
+abbr --add ll "eza --long"
+abbr --add la "eza --long --all"
 abbr --add ta "tmux new -A -s default"
+abbr --add cat "bat --italic-text=always"
+abbr --add diff "delta --side-by-side"
 
 fish_add_path (go env GOPATH)/bin
 fish_add_path ~/.cargo/bin
@@ -34,10 +39,5 @@ export FZF_CTRL_T_OPTS="
     --bind 'ctrl-/:change-preview-window(down|hidden|)'
     --bind 'ctrl-o:execute($EDITOR {} &> /dev/tty)'"
 
+starship init fish | source
 zoxide init fish | source
-
-# start x at login
-if status is-login
-and test -z "$DISPLAY" -a $XDG_VTNR = 1
-    exec startx -- -keeptty
-end
