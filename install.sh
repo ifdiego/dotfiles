@@ -6,25 +6,20 @@ git clone https://github.com/ifdiego/dotfiles.git ~/dotfiles
 cat ~/dotfiles/packages | sudo pacman -S --needed -
 stow -d ~/dotfiles -t ~ .
 
-# sudo cp ~/.etc/10-keyboard.conf /etc/X11/xorg.conf.d/10-keyboard.conf
-sudo cp ~/.etc/30-touchpad.conf /etc/X11/xorg.conf.d/30-touchpad.conf
-
 chsh -s "$(which fish)"
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source
+fisher update
 
 sudo systemctl start docker.service
 sudo systemctl enable docker.service
 sudo usermod -aG docker "$USER"
 
 chmod 700 ~/.ssh
-curl https://github.com/ifdiego.keys -o ~/.ssh/id_rsa.pub
-ssh-add ~/.ssh/id_rsa
+curl https://github.com/ifdiego.keys -o ~/.ssh/id_ed25519.pub
+ssh-add ~/.ssh/id_ed25519
 ssh -T git@github.com
 
-chmod 700 ~/.gnupg
-gpg --import public.asc # gpg --export --armor > public.asc
-gpg --import private.asc # gpg --export-secret-keys --armor > private.asc
-gpg --list-secret-keys --keyid-format=long
-
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 rustup default stable
 mkdir -p ~/.cargo/bin
 
