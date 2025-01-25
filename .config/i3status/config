@@ -11,13 +11,9 @@ general {
         interval = 5
 }
 
-order += "ipv6"
 order += "wireless _first_"
 order += "ethernet _first_"
-order += "battery all"
-order += "disk /"
-order += "load"
-order += "memory"
+order += "volume master"
 order += "tztime local"
 
 wireless _first_ {
@@ -30,24 +26,11 @@ ethernet _first_ {
         format_down = "E: down"
 }
 
-battery all {
-        format = "%status %percentage %remaining"
-}
-
-disk "/" {
-        format = "%avail"
-}
-
-load {
-        format = "%1min"
-}
-
-memory {
-        format = "%used | %available"
-        threshold_degraded = "1G"
-        format_degraded = "MEMORY < %available"
-}
-
 tztime local {
         format = "%Y-%m-%d %H:%M:%S"
+}
+
+volume master {
+    format = "VOL: %volume"
+    format_muted = "VOL: Muted"
 }
