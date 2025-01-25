@@ -1,0 +1,110 @@
+#!/bin/bash
+
+packages=(
+    bat
+    brightnessctl
+    btop
+    clang
+    cloc
+    cmake
+    copyq
+    curl
+    delve
+    docker
+    docker-compose
+    duf
+    entr
+    eza
+    fastfetch
+    fd
+    feh
+    ffmpeg
+    firefox
+    fish
+    fzf
+    gdb
+    ghostty
+    git
+    git-delta
+    github-cli
+    glow
+    go
+    hyperfine
+    hypridle
+    hyprland
+    hyprlock
+    hyprpaper
+    jq
+    lldb
+    llvm
+    lsof
+    lua-language-server
+    man-db
+    man-pages
+    mpv
+    mupdf
+    ncdu
+    neovim
+    nodejs
+    npm
+    pcmanfm-gtk3
+    qemu-base
+    ripgrep
+    rsync
+    shellcheck
+    starship
+    stow
+    strace
+    tig
+    tldr
+    tmux
+    transmission-cli
+    transmission-gtk
+    typescript
+    typescript-language-server
+    udiskie
+    unrar
+    unzip
+    waybar
+    wget
+    wl-clipboard
+    wofi
+    yazi
+    zig
+    zip
+    zls
+    zoxide
+)
+
+for package in "${packages[@]}"; do
+    sudo pacman -S --needed "$package"
+done
+
+git clone https://github.com/ifdiego/dotfiles.git ~/dotfiles
+stow -d ~/dotfiles -t ~ .
+
+chsh -s "$(which fish)"
+curl -sL https://git.io/fisher | source
+fisher update
+
+sudo systemctl start docker.service
+sudo systemctl enable docker.service
+sudo usermod -aG docker "$USER"
+
+chmod 700 ~/.ssh
+curl https://github.com/ifdiego.keys -o ~/.ssh/id_ed25519.pub
+ssh-add ~/.ssh/id_ed25519
+ssh -T git@github.com
+
+gh auth login
+
+go install golang.org/x/tools/gopls@latest
+go install github.com/joshmedeski/sesh@latest
+
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+rustup default stable
+rustup component add rust-analyzer
+mkdir -p ~/.cargo/bin
+ln -s "$(rustup which rust-analyzer)" ~/.cargo/bin/rust-analyzer
+
+git -C ~/dotfiles remote set-url origin git@github.com:ifdiego/dotfiles.git

@@ -7,8 +7,6 @@ abbr --add ls "eza"
 abbr --add ll "eza --long"
 abbr --add la "eza --long --all"
 abbr --add ta "tmux new -A -s default"
-abbr --add cat "bat --italic-text=always"
-abbr --add diff "delta --side-by-side"
 
 fish_add_path (go env GOPATH)/bin
 fish_add_path ~/.cargo/bin
@@ -41,3 +39,7 @@ export FZF_CTRL_T_OPTS="
 
 starship init fish | source
 zoxide init fish | source
+
+if test (tty) = "/dev/tty1"
+    exec Hyprland
+end
