@@ -29,6 +29,7 @@ packages=(
     github-cli
     glow
     go
+    grim
     hyperfine
     hypridle
     hyprland
@@ -52,9 +53,11 @@ packages=(
     ripgrep
     rsync
     shellcheck
+    slurp
     starship
     stow
     strace
+    swaync
     tig
     tldr
     tmux

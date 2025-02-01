@@ -1,0 +1,12 @@
+#!/bin/bash
+
+OPTION="$1"
+DEVICE="dell07de:00-06cb:75c5-touchpad"
+
+if [ "$OPTION" -eq 0 ]; then
+	notify-send -u normal "Disabling Touchpad" -t 1000
+	hyprctl keyword "device[$HYPRLAND_DEVICE]:enabled" false
+elif [ "$OPTION" -eq 1 ]; then
+	notify-send -u normal "Enabling Touchpad" -t 1000
+	hyprctl keyword "device[$HYPRLAND_DEVICE]:enabled" true
+fi

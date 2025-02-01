@@ -1,0 +1,7 @@
+#!/bin/bash
+
+pacman -Sl | fzf -e -m +s --reverse --preview 'pacman -Sii {2}'
+
+# pacman -Sl | \
+#     fzf -e -m +s --reverse --preview 'pacman -Sii {2}' \
+#     --bind "ctrl-l:toggle-preview"
