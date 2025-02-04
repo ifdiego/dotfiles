@@ -1,0 +1,22 @@
+* {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+window#waybar {
+    background-color: rgba(16, 22, 33, 0.5);
+    color: #ffffff;
+}
+
+#clock,
+#cpu,
+#memory,
+#temperature,
+#pulseaudio,
+#idle_inhibitor,
+#network
+#backlight,
+#battery,
+#tray {
+    padding: 0 0.8em;
+}

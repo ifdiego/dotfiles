@@ -5,9 +5,9 @@ packages=(
     brightnessctl
     btop
     clang
+    cliphist
     cloc
     cmake
-    copyq
     curl
     delve
     docker
@@ -29,12 +29,14 @@ packages=(
     github-cli
     glow
     go
+    goreleaser
     grim
     hyperfine
     hypridle
     hyprland
     hyprlock
     hyprpaper
+    imv
     jq
     lldb
     llvm
@@ -43,10 +45,10 @@ packages=(
     man-db
     man-pages
     mpv
-    mupdf
     ncdu
     neovim
     nodejs
+    noto-fonts
     npm
     pcmanfm-gtk3
     qemu-base
@@ -63,8 +65,6 @@ packages=(
     tmux
     transmission-cli
     transmission-gtk
-    typescript
-    typescript-language-server
     udiskie
     unrar
     unzip
@@ -72,7 +72,10 @@ packages=(
     wget
     wl-clipboard
     wofi
+    wtype
     yazi
+    zathura
+    zathura-pdf-poppler
     zig
     zip
     zls
@@ -109,5 +112,8 @@ rustup default stable
 rustup component add rust-analyzer
 mkdir -p ~/.cargo/bin
 ln -s "$(rustup which rust-analyzer)" ~/.cargo/bin/rust-analyzer
+
+npm config set prefix '~/.local/'
+npm install -g typescript typescript-language-server
 
 git -C ~/dotfiles remote set-url origin git@github.com:ifdiego/dotfiles.git
