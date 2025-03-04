@@ -1,7 +1,7 @@
 [user]
 	name = Diego Alves
-	email = alvessd@live.com
-	signingKey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIESA+dSgDxCqTQ16Z/gHOUrPKuw2//elfTBHVlsxZJKy alvessd@live.com
+	email = ifdiego@users.noreply.github.com
+	signingKey = ~/.ssh/id_ed25519.pub
 [core]
 	editor = nvim
 	pager = delta
