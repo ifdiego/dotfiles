@@ -8,15 +8,23 @@ window#waybar {
     color: #ffffff;
 }
 
-#clock,
+#workspaces button.active {
+    border-bottom: 3px solid rgb(255, 255, 255);
+    border-radius: 0px;
+}
+
+#custom-power {
+    padding-top: 0.5em;
+}
+
+#pulseaudio,
+#network,
 #cpu,
 #memory,
 #temperature,
-#pulseaudio,
-#idle_inhibitor,
-#network
 #backlight,
 #battery,
+#clock,
 #tray {
-    padding: 0 0.8em;
+    padding: 0 0.5em;
 }
