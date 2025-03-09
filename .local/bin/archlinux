@@ -70,18 +70,11 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 pacman -S networkmanager
 systemctl enable NetworkManager
-
-pacman -S firefox
-pacman -S man-db man-pages
-pacman -S noto-fonts
-pacman -S pcmanfm-gtk3
-pacman -S transmission-cli transmission-gtk
 exit
 
 umount /mnt
 umount -f /mnt
 umount -l /mnt
-reboot
 
 nmcli device wifi list
 sudo nmcli device wifi connect NETWORKNAME password NETWORKPASSWORD
