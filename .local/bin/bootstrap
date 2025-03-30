@@ -4,10 +4,8 @@ packages=(
     bat
     brightnessctl
     btop
-    clang
     cliphist
     cloc
-    cmake
     curl
     delve
     docker
@@ -17,7 +15,6 @@ packages=(
     eza
     fastfetch
     fd
-    feh
     ffmpeg
     firefox
     fish
@@ -29,13 +26,15 @@ packages=(
     github-cli
     glow
     go
+    go-task
+    gopls
     goreleaser
     grim
+    hugo
     hyperfine
     hypridle
     hyprland
     hyprlock
-    hyprpaper
     imv
     jq
     lldb
@@ -51,9 +50,10 @@ packages=(
     noto-fonts
     npm
     pcmanfm-gtk3
-    qemu-base
     ripgrep
     rsync
+    rust-analyzer
+    rustup
     shellcheck
     slurp
     starship
@@ -65,6 +65,8 @@ packages=(
     tmux
     transmission-cli
     transmission-gtk
+    typescript
+    typescript-language-server
     udiskie
     unrar
     unzip
@@ -73,6 +75,7 @@ packages=(
     wl-clipboard
     wofi
     wtype
+    yarn
     yazi
     zathura
     zathura-pdf-poppler
@@ -97,23 +100,28 @@ sudo systemctl start docker.service
 sudo systemctl enable docker.service
 sudo usermod -aG docker "$USER"
 
+systemctl --user enable ssh-agent
+
 chmod 700 ~/.ssh
 curl https://github.com/ifdiego.keys -o ~/.ssh/id_ed25519.pub
 ssh-add ~/.ssh/id_ed25519
 ssh -T git@github.com
 
-gh auth login
+mkdir -p ~/projects
 
-go install golang.org/x/tools/gopls@latest
+gh auth login
+gh repo list --json owner,name --jq '.[] | select(.name != "dotfiles") | "\(.owner.login)/\(.name)"' |
+while IFS= read -r repo; do
+    git clone "git@github.com:$repo.git" ~/projects/"${repo#*/}"
+done
+
 go install github.com/joshmedeski/sesh@latest
 
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 rustup default stable
-rustup component add rust-analyzer
-mkdir -p ~/.cargo/bin
-ln -s "$(rustup which rust-analyzer)" ~/.cargo/bin/rust-analyzer
 
-npm config set prefix '~/.local/'
-npm install -g typescript typescript-language-server
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
+makepkg -si
+yay -S brave-bin
 
 git -C ~/dotfiles remote set-url origin git@github.com:ifdiego/dotfiles.git
