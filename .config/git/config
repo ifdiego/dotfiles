@@ -4,12 +4,9 @@
 	signingKey = ~/.ssh/id_ed25519.pub
 [core]
 	editor = nvim
-	pager = delta
 [commit]
 	gpgsign = true
 [init]
 	defaultBranch = main
 [gpg]
 	format = ssh
-[delta]
-	navigate = true

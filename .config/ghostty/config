@@ -1,6 +1,5 @@
 font-feature = -calt
 font-feature = -liga
 font-feature = -dlig
+cursor-invert-fg-bg = true
 mouse-hide-while-typing = true
-gtk-titlebar = false
-gtk-adwaita = false

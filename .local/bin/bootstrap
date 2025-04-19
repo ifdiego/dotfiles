@@ -2,85 +2,48 @@
 
 packages=(
     bat
-    brightnessctl
     btop
-    cliphist
     cloc
+    copyq
     curl
     delve
     docker
     docker-compose
     duf
-    entr
     eza
     fastfetch
     fd
     ffmpeg
-    firefox
     fish
     fzf
-    gdb
     ghostty
     git
-    git-delta
     github-cli
     glow
     go
     go-task
     gopls
     goreleaser
-    grim
-    hugo
+    gnome-tweaks
     hyperfine
-    hypridle
-    hyprland
-    hyprlock
-    imv
     jq
     lldb
     llvm
-    lsof
-    lua-language-server
-    man-db
-    man-pages
     mpv
-    ncdu
     neovim
     nodejs
-    noto-fonts
     npm
-    pcmanfm-gtk3
     ripgrep
-    rsync
     rust-analyzer
     rustup
-    shellcheck
-    slurp
-    starship
     stow
     strace
-    swaync
-    tig
-    tldr
     tmux
     transmission-cli
     transmission-gtk
-    typescript
-    typescript-language-server
-    udiskie
-    unrar
-    unzip
-    waybar
     wget
-    wl-clipboard
-    wofi
-    wtype
-    yarn
-    yazi
-    zathura
-    zathura-pdf-poppler
+    xclip
     zig
-    zip
     zls
     zoxide
 )
@@ -100,24 +63,22 @@ sudo systemctl start docker.service
 sudo systemctl enable docker.service
 sudo usermod -aG docker "$USER"
 
-systemctl --user enable ssh-agent
-
 chmod 700 ~/.ssh
 curl https://github.com/ifdiego.keys -o ~/.ssh/id_ed25519.pub
 ssh-add ~/.ssh/id_ed25519
 ssh -T git@github.com
 
-mkdir -p ~/projects
-
 gh auth login
 gh repo list --json owner,name --jq '.[] | select(.name != "dotfiles") | "\(.owner.login)/\(.name)"' |
 while IFS= read -r repo; do
-    git clone "git@github.com:$repo.git" ~/projects/"${repo#*/}"
+    git clone "git@github.com:$repo.git" ~/"${repo#*/}"
 done
 
-go install github.com/joshmedeski/sesh@latest
-
 rustup default stable
+
+gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
+gsettings set org.gnome.desktop.peripherals.keyboard delay 200
+gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 10
 
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin

@@ -48,23 +48,18 @@ vim.opt.virtualedit = "block"
 vim.opt.inccommand = "split"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.completeopt = "menuone,noinsert,noselect"
 vim.opt.jumpoptions = "stack,view"
-vim.opt.wildmode = "longest:list,full"
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.stdpath "data" .. "undo"
 
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 30
-vim.g.netrw_liststyle = 3
 
 vim.g.mapleader = " "
 vim.keymap.set("n", "<space>", "<nop>")
 
 -- files
 vim.keymap.set("n", "<leader>e", vim.cmd.Explore)
-vim.keymap.set("n", "<leader>t", vim.cmd.Lexplore)
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 -- move lines up/down
@@ -116,13 +111,13 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
 vim.cmd.colorscheme "default"
+vim.cmd.highlight "StatusLine guifg=NvimLightGrey3 guibg=NvimDarkGrey1"
 
 local fzf = require "fzf-lua"
 fzf.setup { "ivy", keymap = { fzf = { ["ctrl-q"] = "select-all+accept" } } }
 vim.keymap.set("n", "<leader>ff", fzf.files)
 vim.keymap.set("n", "<leader>fg", fzf.live_grep)
 vim.keymap.set("n", "<leader>fb", fzf.buffers)
-vim.keymap.set("n", "<leader>fh", fzf.helptags)
 vim.keymap.set("n", "<leader>gf", fzf.git_files)
 vim.keymap.set("n", "<leader>gl", fzf.git_commits)
 vim.keymap.set("n", "<leader>fd", fzf.lsp_document_diagnostics)
@@ -212,7 +207,6 @@ require("mini.surround").setup {}
 -- require("oil").setup { view_options = { show_hidden = true } }
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-  group = vim.api.nvim_create_augroup("HighlightYank", { clear = true }),
   callback = function()
     vim.highlight.on_yank()
   end,
