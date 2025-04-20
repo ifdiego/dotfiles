@@ -10,3 +10,6 @@
 	defaultBranch = main
 [gpg]
 	format = ssh
+[alias]
+	st = status
+	d = diff

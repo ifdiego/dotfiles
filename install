@@ -1,16 +1,13 @@
 #!/bin/bash
 
 packages=(
-    bat
     btop
     cloc
-    copyq
     curl
     delve
     docker
     docker-compose
     duf
-    eza
     fastfetch
     fd
     ffmpeg
@@ -20,51 +17,74 @@ packages=(
     git
     github-cli
     glow
+    gnome-browser-connector
+    gnome-tweaks
     go
     go-task
     gopls
     goreleaser
-    gnome-tweaks
     hyperfine
     jq
+    less
     lldb
     llvm
     mpv
     neovim
     nodejs
+    noto-fonts
     npm
     ripgrep
     rust-analyzer
     rustup
-    stow
-    strace
+    starship
     tmux
-    transmission-cli
     transmission-gtk
+    tree
     wget
     xclip
+    xorg-xrandr
     zig
     zls
     zoxide
 )
 
 for package in "${packages[@]}"; do
-    sudo pacman -S --needed "$package"
+    sudo pacman -S --needed --noconfirm "$package"
 done
 
 git clone https://github.com/ifdiego/dotfiles.git ~/dotfiles
-stow -d ~/dotfiles -t ~ .
+# stow -d ~/dotfiles -t ~ .
+
+mkdir -p ~/.config/fish
+mkdir -p ~/.config/ghostty
+mkdir -p ~/.config/git
+mkdir -p ~/.config/nvim
+mkdir -p ~/.config/tmux
+mkdir -p ~/.ssh
+
+ln -i -s ~/dotfiles/.config/fish/config.fish ~/.config/fish/config.fish
+ln -i -s ~/dotfiles/.config/fish/fish_plugins ~/.config/fish/fish_plugins
+ln -i -s ~/dotfiles/.config/ghostty/config ~/.config/ghostty/config
+ln -i -s ~/dotfiles/.config/git/config ~/.config/git/config
+ln -i -s ~/dotfiles/.config/nvim/init.lua ~/.config/nvim/init.lua                            │
+ln -i -s ~/dotfiles/.config/nvim/lazy-lock.json ~/.config/nvim/lazy-lock.json
+ln -i -s ~/dotfiles/.config/starship.toml ~/.config/starship.toml
+ln -i -s ~/dotfiles/.config/tmux/tmux.conf ~/.config/tmux/tmux.conf
+ln -i -s ~/dotfiles/.editorconfig ~/
+ln -i -s ~/dotfiles/.ssh/config ~/.ssh/config
+ln -i -s ~/dotfiles/.xprofile ~/
 
 chsh -s "$(which fish)"
-curl -sL https://git.io/fisher | source
-fisher update
+fish -c "curl -sL https://git.io/fisher | source"
+fish -c "fisher update"
 
 sudo systemctl start docker.service
 sudo systemctl enable docker.service
 sudo usermod -aG docker "$USER"
 
-chmod 700 ~/.ssh
+chmod 600 ~/.ssh
 curl https://github.com/ifdiego.keys -o ~/.ssh/id_ed25519.pub
+eval (ssh-agent -c)
 ssh-add ~/.ssh/id_ed25519
 ssh -T git@github.com
 
