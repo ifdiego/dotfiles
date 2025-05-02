@@ -12,4 +12,5 @@
 	format = ssh
 [alias]
 	st = status
-	d = diff
+	co = checkout
+    lg = log --oneline --graph
