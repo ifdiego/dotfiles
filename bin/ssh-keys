@@ -1,0 +1,7 @@
+#!/bin/bash
+
+chmod 700 ~/.ssh
+curl https://github.com/ifdiego.keys -o ~/.ssh/id_ed25519.pub
+eval (ssh-agent -c)
+ssh-add ~/.ssh/id_ed25519
+ssh -T git@github.com

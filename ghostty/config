@@ -1,4 +1,7 @@
-font-feature = -calt
+font-feature = -calt,
 font-feature = -liga
 font-feature = -dlig
+theme =
+cursor-invert-fg-bg = true
 mouse-hide-while-typing = true
+maximize = true
