@@ -11,7 +11,7 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 
 -- setup lazy.nvim
-require("lazy").setup({
+require "lazy".setup({
   spec = {
     -- language servers
     {
@@ -76,6 +76,97 @@ require("lazy").setup({
         }
       end,
     },
+    -- autocomplete
+    {
+      "Saghen/blink.cmp",
+      dependencies = { "rafamadriz/friendly-snippets" },
+      version = "1.*",
+      config = function()
+        require "blink.cmp".setup {
+          keymap = { preset = "default" },
+          appearance = {
+            nerd_font_variant = "mono"
+          },
+          completion = { documentation = { auto_show = true } },
+          signature = { enabled = true },
+          -- cmdline = { enabled = false },
+          sources = {
+            default = { "lsp", "path", "snippets", "buffer" },
+          },
+          fuzzy = { implementation = "prefer_rust_with_warning" }
+        }
+      end,
+    },
+    -- git
+    {
+      "lewis6991/gitsigns.nvim",
+      config = function()
+        require "gitsigns".setup {}
+      end,
+    },
+    -- neovim's magit
+    {
+      "NeogitOrg/neogit",
+      config = function()
+        require "neogit".setup {}
+        vim.keymap.set("n", "<leader>gg", ":Neogit kind=replace<cr>", { desc = "Neogit" })
+      end,
+    },
+    -- quickfix
+    {
+      "folke/trouble.nvim",
+      config = function()
+        require "trouble".setup {}
+        vim.keymap.set("n", "<leader>d", ":Trouble diagnostics toggle<cr>", { desc = "Quickfix" })
+      end,
+    },
+    -- help shortcuts
+    {
+      "folke/which-key.nvim",
+      event = "VeryLazy",
+      config = function()
+        require "which-key".setup {}
+      end,
+    },
+    -- mini plugins
+    {
+      "echasnovski/mini.nvim",
+      config = function()
+        require "mini.splitjoin".setup {}
+        require "mini.surround".setup {}
+
+        local statusline = require "mini.statusline"
+        statusline.setup { use_icons = true }
+
+        statusline.section_location = function()
+          return "%2l:%-2v"
+        end
+      end,
+    },
+    -- file explorer
+    {
+      "stevearc/oil.nvim",
+      config = function()
+        require "oil".setup {
+          columns = {
+            "icon",
+            "size",
+            "mtime",
+          },
+          delete_to_trash = true,
+          skip_confirm_for_simple_edits = true,
+          -- prompt_save_on_select_new_entry = true,
+          keymaps = {
+            ["<cr>"] = "actions.select",
+            ["q"] = { "actions.close", mode = "n" },
+          },
+          view_options = {
+            show_hidden = true,
+          },
+        }
+        vim.keymap.set("n", "-", ":Oil<cr>", { desc = "File explorer" })
+      end,
+    },
   },
   -- automatically check for plugin updates
   checker = { enabled = true },
@@ -110,6 +201,11 @@ vim.opt.undofile = true
 
 -- keybinds
 vim.keymap.set("n", "<space>", "<nop>")
+-- vim.keymap.set("n", "<leader>e", ":Explore<cr>", { desc = "File explorer" })
+vim.keymap.set("n", "<leader>w", ":write<cr>", { desc = "Save file" })
+vim.keymap.set("n", "<leader>q", ":quitall<cr>", { desc = "Quit" })
+vim.keymap.set("n", "<leader>x", ":bdelete<cr>", { desc = "Close buffer" })
+-- vim.keymap.set("n", "<leader>d", vim.diagnostic.setqflist, { desc = "Send quickfix" })
 
 -- move lines up/down
 vim.keymap.set("v", "J", ":move '>+1<cr>gv=gv")
@@ -138,9 +234,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
 
     -- enable completion when available
-    if client:supports_method("textDocument/completion") then
-      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-    end
+    -- if client:supports_method("textDocument/completion") then
+    --   vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+    -- end
 
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Goto declaration" })
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Goto definition" })
@@ -160,12 +256,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
--- see `:h completeopt`
-vim.opt.completeopt = "menuone,popup,noselect,fuzzy"
--- map <c-space> to activate completion
-vim.keymap.set("i", "<c-space>", function()
-  vim.lsp.completion.get()
-end)
+-- -- see `:h completeopt`
+-- vim.opt.completeopt = "menuone,popup,noselect,fuzzy"
+-- -- map <c-space> to activate completion
+-- vim.keymap.set("i", "<c-space>", function()
+--   vim.lsp.completion.get()
+-- end)
 
 -- disable comment on new line
 vim.api.nvim_create_autocmd("FileType", {
