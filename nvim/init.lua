@@ -60,6 +60,15 @@ require "lazy".setup({
         vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "Diagnostics" })
       end,
     },
+    {
+      "ibhagwan/fzf-lua",
+      config = function()
+        require "fzf-lua".setup {}
+        -- vim.keymap.set("n", "<leader>ff", ":FzfLua files<cr>")
+        -- vim.keymap.set("n", "<leader>fg", ":FzfLua live_grep<cr>")
+        -- vim.keymap.set("n", "<leader>fb", ":FzfLua buffers<cr>")
+      end,
+    },
     -- syntax highlight
     {
       "nvim-treesitter/nvim-treesitter",
@@ -104,14 +113,6 @@ require "lazy".setup({
         require "gitsigns".setup {}
       end,
     },
-    -- neovim's magit
-    {
-      "NeogitOrg/neogit",
-      config = function()
-        require "neogit".setup {}
-        vim.keymap.set("n", "<leader>gg", ":Neogit kind=replace<cr>", { desc = "Neogit" })
-      end,
-    },
     -- quickfix
     {
       "folke/trouble.nvim",
@@ -120,27 +121,12 @@ require "lazy".setup({
         vim.keymap.set("n", "<leader>d", ":Trouble diagnostics toggle<cr>", { desc = "Quickfix" })
       end,
     },
-    -- help shortcuts
-    {
-      "folke/which-key.nvim",
-      event = "VeryLazy",
-      config = function()
-        require "which-key".setup {}
-      end,
-    },
     -- mini plugins
     {
       "echasnovski/mini.nvim",
       config = function()
         require "mini.splitjoin".setup {}
         require "mini.surround".setup {}
-
-        local statusline = require "mini.statusline"
-        statusline.setup { use_icons = true }
-
-        statusline.section_location = function()
-          return "%2l:%-2v"
-        end
       end,
     },
     -- file explorer
@@ -201,11 +187,10 @@ vim.opt.undofile = true
 
 -- keybinds
 vim.keymap.set("n", "<space>", "<nop>")
--- vim.keymap.set("n", "<leader>e", ":Explore<cr>", { desc = "File explorer" })
-vim.keymap.set("n", "<leader>w", ":write<cr>", { desc = "Save file" })
-vim.keymap.set("n", "<leader>q", ":quitall<cr>", { desc = "Quit" })
-vim.keymap.set("n", "<leader>x", ":bdelete<cr>", { desc = "Close buffer" })
--- vim.keymap.set("n", "<leader>d", vim.diagnostic.setqflist, { desc = "Send quickfix" })
+-- vim.keymap.set("n", "<leader>e", ":Explore<cr>")
+vim.keymap.set("n", "<leader>w", ":write<cr>")
+vim.keymap.set("n", "<leader>q", ":quitall<cr>")
+vim.keymap.set("n", "<leader>x", ":bdelete<cr>")
 
 -- move lines up/down
 vim.keymap.set("v", "J", ":move '>+1<cr>gv=gv")
@@ -225,8 +210,7 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
 vim.diagnostic.config {
-  virtual_text = true,
-  virtual_lines = false
+  virtual_text = true
 }
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -238,9 +222,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     --   vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
     -- end
 
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Goto declaration" })
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Goto definition" })
-    vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, { desc = "Goto type definition" })
+    -- vim.keymap.set("n", "<leader>d", vim.diagnostic.setqflist)
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+    vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition)
 
     -- auto-format ("lint") on save
     if client:supports_method("textDocument/formatting") then

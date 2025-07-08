@@ -2,5 +2,5 @@
 
 gh repo list --json owner,name --jq '.[] | select(.name != "dotfiles") | "\(.owner.login)/\(.name)"' |
 while IFS= read -r repo; do
-    git clone "git@github.com:$repo.git" ~/"${repo#*/}"
+    git clone "git@github.com:$repo.git" ~/Documents/"${repo#*/}"
 done
