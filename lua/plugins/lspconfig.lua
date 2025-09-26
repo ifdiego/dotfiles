@@ -5,13 +5,8 @@ return {
     -- use LspAttach autocommand to only map the following keys
     -- after the language server attaches to the current buffer
     vim.api.nvim_create_autocmd("LspAttach", {
-      callback = function(args)
-        local bufnr = args.buf
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-
-        if client.server_capabilities.completionProvider then
-          vim.bo[bufnr].omnifunc = "v.lua.vim.lsp.omnifunc"
-        end
+      callback = function(ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
 
         -- see `:help vim.lsp.*` for documentation on any of the below functions
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
@@ -31,24 +26,30 @@ return {
           vim.lsp.buf.format { async = true }
         end)
 
-        -- enable inlay hints
-        -- https://neovim.io/doc/user/lsp.html#lsp-inlay_hint
-        if client.server_capabilities.inlayHintProvider then
-          vim.lsp.inlay_hint.enable(true)
+        -- auto-format ("lint") on save
+        if client:supports_method("textDocument/formatting") then
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = ev.buf,
+            callback = function()
+              vim.lsp.buf.format({ bufnr = ev.buf, id = client.id, timeout_ms = 1000 })
+            end,
+          })
         end
 
-        vim.keymap.set("n", "<leader>h", function()
-          vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-        end)
-
-        -- none of this semantics tokens business
-        -- https://www.reddit.com/r/neovim/comments/143efmd/is_it_possible_to_disable_treesitter_completely/
-        client.server_capabilities.semanticTokensProvider = nil
+        -- enable inlay hints
+        -- https://neovim.io/doc/user/lsp.html#lsp-inlay_hint
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
       end,
     })
 
+    vim.lsp.enable("gopls")
+    vim.lsp.enable("rust-analyzer")
+    vim.lsp.enable("ts_ls")
+    vim.lsp.enable("zls")
+
     vim.diagnostic.config {
-      update_in_insert = true,
+      virtual_text = true,
+      virtual_lines = false
     }
   end
 }
