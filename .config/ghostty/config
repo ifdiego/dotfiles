@@ -1,0 +1,3 @@
+# font-feature = -calt, -liga, -dlig
+theme = Catppuccin Mocha
+maximize = true
