@@ -1,0 +1,19 @@
+[user]
+	name = Diego Alves
+	email = ifdiego@users.noreply.github.com
+	signingKey = ~/.ssh/id_ed25519.pub
+[commit]
+	gpgSign = true
+[init]
+	defaultBranch = main
+[gpg]
+	format = ssh
+[push]
+	autoSetupRemote = true
+[alias]
+	br = branch
+	ci = commit
+	co = checkout
+	st = status
+	lg = log --oneline --graph
+	authors = !git log --format='%an <%ae>' | sort -u
