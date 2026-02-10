@@ -1,3 +1,13 @@
 # font-feature = -calt, -liga, -dlig
+# font-size = 14
+# theme = dark:Catppuccin Mocha,light:Catppuccin Latte
 theme = Catppuccin Mocha
+mouse-hide-while-typing = true
+# unfocused-split-opacity = 0.9
 maximize = true
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:bottom
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+l=goto_split:right
+confirm-close-surface = false
+# shell-integration = zsh

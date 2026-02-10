@@ -2,6 +2,8 @@
 	name = Diego Alves
 	email = ifdiego@users.noreply.github.com
 	signingKey = ~/.ssh/id_ed25519.pub
+[core]
+	editor = hx
 [commit]
 	gpgSign = true
 [init]
@@ -17,3 +19,6 @@
 	st = status
 	lg = log --oneline --graph
 	authors = !git log --format='%an <%ae>' | sort -u
+	last = log -1 HEAD
+[rerere]
+	enabled = true
