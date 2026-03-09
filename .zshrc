@@ -70,11 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    git
-    zsh-syntax-highlighting
-    zsh-autosuggestions
-)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions zig-shell-completions)
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 autoload -U compinit && compinit
@@ -108,7 +104,61 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias hx="helix"
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
 
-eval "$(zoxide init zsh)"
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_dups
+
+alias hx="helix"
+alias g="git"
+alias d="docker"
+
+alias temp='pushd "$(mktemp -d)"'
+alias open="xdg-open"
+# alias rebuild="sudo nixos-rebuild switch"
+# alias collect="sudo nix-collect-garbage -d"
+alias rsv="rsync -avh --info=progress2"
+alias tna="tmux new -A -s 0"
+alias tks="tmux kill-server"
+alias fd="fd --hidden"
+alias rr="rm -rf"
+alias gmt="go mod tidy"
+
+# Git
+alias ga="git add"
+alias gb="git branch"
+alias gc="git commit"
+alias gco="git checkout"
+alias gd="git diff"
+alias gl="git log --oneline --graph"
+alias gla="git log --format='%an <%ae>' | sort -u"
+alias glh="git log -1 HEAD"
+alias gs="git status"
+
+mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+cdr() {
+    cd "$(git rev-parse --path-format=relative --show-toplevel 2>/dev/null)"
+}
+
+syu() {
+    sudo pacman -Syu
+    flatpak update
+}
+
+git-file-sizes() {
+    git ls-files -z | xargs -0 du -b | sort -n;
+}
+
+docker-prune-all-old() {
+    docker system prune --all --filter until=730h
+}
+
 source <(fzf --zsh)
+eval "$(zoxide init zsh)"
