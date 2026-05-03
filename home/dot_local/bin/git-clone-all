@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+gh repo list --limit 1000 --json owner,name --jq '.[] | "\(.owner.login)/\(.name)"' |
+while IFS= read -r repo; do
+    git clone "git@github.com:$repo.git" ~/Documents/"${repo#*/}"
+done

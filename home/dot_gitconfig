@@ -1,0 +1,19 @@
+[user]
+	name = Diego Alves
+	email = ifdiego@users.noreply.github.com
+	signingKey = ~/.ssh/id_ed25519.pub
+[core]
+	editor = hx
+[push]
+	default = current
+	autoSetupRemote = true
+	followTags = true
+[commit]
+	verbose = true
+	gpgSign = true
+[gpg]
+	format = ssh
+[init]
+	defaultBranch = main
+[rerere]
+	enabled = true
