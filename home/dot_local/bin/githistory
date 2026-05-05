@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# githist - export repository history into sequential snapshots
+# creates a folder for each commit and extracts its contents
+# outputs to ./history/ as commit_1, commit_2, ...
+
+set -euo pipefail
+
+OUTPUT_DIR="history"
+mkdir -p "$OUTPUT_DIR"
+
+count=1
+for commit in $(git rev-list --reverse HEAD); do
+    mkdir "$OUTPUT_DIR/commit_$count"
+    git archive $commit | tar -x -C "$OUTPUT_DIR/commit_$count"
+    count=$((count+1))
+done

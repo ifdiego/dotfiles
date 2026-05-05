@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+# vidpress - batch video compression with ffmpeg (libx265, CRF 28)
+# processes given files or scans current directory for videos
+# outputs to ./compressed/ preserving filenames (originals untouched)
+
+set -euo pipefail
+trap "tput cnorm 2>/dev/null; exit" INT TERM EXIT
+
+# ensure ffmpeg is available in PATH
+if ! command -v ffmpeg &> /dev/null; then
+    echo "[error]: ffmpeg is not installed"
+    exit 1
+fi
+
+# detect whether a file is a video
+# returns 0 if MIME type starts with "video/", otherwise returns 1
+is_video() {
+    file --brief --mime-type -- "$1" | grep -q '^video/'
+}
+
+videos=()
+
+# determine input source:
+# - if arguments were provided, use them
+# - otherwise, scan current directory
+if [[ $# -gt 0 ]]; then
+    inputs=("$@")
+    echo "[info]: processing files passed as arguments"
+else
+    inputs=(*)
+    echo "[info]: scanning current directory for supported video files"
+fi
+
+# filter valid video files
+for file in "${inputs[@]}"; do
+    if [[ -f "$file" ]] && is_video "$file" && [[ "$file" != compressed/* ]]; then
+        videos+=("$file")
+    else
+        echo "[skip]: $file (not a supported video file)"
+    fi
+done
+
+# exit program if no valid videos were found
+if [[ ${#videos[@]} -eq 0 ]]; then
+    echo "[error]: no supported video files were found"
+    exit 1
+fi
+
+mkdir -p compressed
+
+# compress each detected video
+for video in "${videos[@]}"; do
+    filename=$(basename -- "$video")
+    output="compressed/$filename"
+
+    ffmpeg -i "$video" -vcodec libx265 -crf 28 "$output" 2>/dev/null &
+    pid=$!
+    start=$(date +%s)
+
+    tput civis 2>/dev/null # hide cursor
+    while kill -0 "$pid" 2>/dev/null; do
+        elapsed=$(( $(date +%s) - start ))
+        printf "\r[info]: compressing %s (%02ds)" "$filename" "$elapsed"
+        sleep 0.1
+    done
+    printf "\r[done]: compressing %s\n" "$filename"
+done
+
+echo "[done]: all videos compressed successfully"
