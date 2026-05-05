@@ -1,54 +1,32 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-packages=(
-	base-devel
-	btop
-	direnv
-	docker
-	docker-compose
-	duf
-	fastfetch
-	fd
-	firefox
-	fish
-	flatpak
-	fzf
-	ghostty
-	git
-	git-filter-repo
-	github-cli
-	gnome-boxes
-	gnome-browser-connector
-	go
-	helix
-	hyperfine
-	jq
-	man-db
-	man-pages
-	neovim
-	nodejs
-	noto-fonts
-	npm
-	ripgrep
-	starship
-	tmux
-	tree
-	wl-clipboard
-	zellij
-	zig
-	zls
-	zoxide
-	zsh
-)
+. /etc/os-release
+curl -fsSL "https://copr.fedorainfracloud.org/coprs/scottames/ghostty/repo/fedora-${VERSION_ID}/scottames-ghostty-fedora-${VERSION_ID}.repo" | sudo tee /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:scottames:ghostty.repo > /dev/null
+rpm-ostree refresh-md && rpm-ostree install ghostty
 
-sudo pacman -S --needed --noconfirm "${packages[@]}"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install fd
+brew install fish
+brew install fzf
+brew install gh
+brew install go
+brew install gopls
+brew install helix
+brew install hugo
+brew install neovim
+brew install ripgrep
+brew install starship
+brew install tmux
+brew install zellij
+brew install zoxide
+brew install zsh
 
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install -y flathub com.brave.Browser
 flatpak install -y flathub com.discordapp.Discord
 flatpak install -y flathub com.spotify.Client
 flatpak install -y flathub md.obsidian.Obsidian
-# flatpak install flathub org.qbittorrent.qBittorrent
 flatpak install -y flathub de.haeckerfelix.Fragments
 flatpak install -y flathub org.videolan.VLC
 
@@ -59,32 +37,17 @@ eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
 ssh -T git@github.com
 
+gh auth login
+
 gsettings set org.gnome.desktop.peripherals.keyboard delay 200
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 10
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-completions.git ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
 git clone https://codeberg.org/ziglang/shell-completions $ZSH/custom/plugins/zig-shell-completions
-
-go install golang.org/x/tools/gopls@latest
-go install github.com/go-delve/delve/cmd/dlv@latest
-go install github.com/go-task/task/v3/cmd/task@latest
-go install github.com/gohugoio/hugo@latest
-go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.10.1
-go install github.com/goreleaser/goreleaser/v2@latest
 
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source ~/.cargo/env
 rustup component add clippy rust-analyzer
 
-curl -fsSL https://ampcode.com/install.sh | bash
-curl -fsSL https://claude.ai/install.sh | bash
 curl -fsSL https://opencode.ai/install | bash
-
-gh auth login
-
-sudo systemctl start docker.service
-sudo systemctl enable --now docker.service
-sudo usermod -aG docker $USER
