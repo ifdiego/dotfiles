@@ -48,6 +48,7 @@ flatpak install -y flathub com.brave.Browser
 flatpak install -y flathub com.discordapp.Discord
 flatpak install -y flathub com.spotify.Client
 flatpak install -y flathub md.obsidian.Obsidian
+# flatpak install flathub org.qbittorrent.qBittorrent
 flatpak install -y flathub de.haeckerfelix.Fragments
 flatpak install -y flathub org.videolan.VLC
 
@@ -66,7 +67,6 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-completions.git ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
 git clone https://codeberg.org/ziglang/shell-completions $ZSH/custom/plugins/zig-shell-completions
-chsh -s $(which zsh)
 
 go install golang.org/x/tools/gopls@latest
 go install github.com/go-delve/delve/cmd/dlv@latest

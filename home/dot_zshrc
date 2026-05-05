@@ -70,10 +70,8 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions zig-shell-completions)
+plugins=(git golang zsh-autosuggestions zig-shell-completions)
 
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-autoload -U compinit && compinit
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -105,14 +103,14 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias temp='pushd "$(mktemp -d)"'
 alias open="xdg-open"
 alias rr="rm -rf"
 alias hx="helix"
 alias fd="fd --hidden"
 alias update="sudo pacman -Syu && flatpak update"
-alias c="clear"
+alias git-deletable-branches="git branch --merged | grep -v main"
+alias gmt="go mod tidy"
 
 mkcd() {
     mkdir -p "$1" && cd "$1"
@@ -126,7 +124,15 @@ git-file-sizes() {
     git ls-files -z | xargs -0 du -b | sort -n;
 }
 
+docker-prune-all-old() {
+    docker system prune --all --filter until=730h
+}
+
+source <(fzf --zsh)
+eval "$(zoxide init zsh)"
+
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 
 # opencode
 export PATH=/home/diego/.opencode/bin:$PATH
