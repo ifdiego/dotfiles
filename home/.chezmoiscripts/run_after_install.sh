@@ -21,6 +21,8 @@ brew install tmux
 brew install zellij
 brew install zoxide
 brew install zsh
+brew install yazi
+brew install direnv
 
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install -y flathub com.brave.Browser
