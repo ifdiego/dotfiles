@@ -52,4 +52,5 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source ~/.cargo/env
 rustup component add clippy rust-analyzer
 
+curl https://mise.run | sh
 curl -fsSL https://opencode.ai/install | bash

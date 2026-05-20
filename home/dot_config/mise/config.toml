@@ -1,0 +1,4 @@
+[tools]
+go = "latest"
+make = "latest"
+node = "lts"

@@ -61,6 +61,7 @@ if status is-interactive
         --bind 'ctrl-o:execute($EDITOR {} &> /dev/tty)'"
 
     direnv hook fish | source
+    mise activate fish | source
     starship init fish | source
     zoxide init fish | source
 end
