@@ -1,5 +1,5 @@
 theme = Catppuccin Macchiato
 mouse-hide-while-typing = true
-command = /home/linuxbrew/.linuxbrew/bin/fish --login --interactive
+command = /home/linuxbrew/.linuxbrew/bin/zsh
 maximize = true
 confirm-close-surface = false

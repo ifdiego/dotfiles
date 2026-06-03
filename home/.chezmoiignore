@@ -1,3 +1,5 @@
+.config/fish
 .config/nvim
+.config/starship.toml
 .config/tmux
 .config/zellij
