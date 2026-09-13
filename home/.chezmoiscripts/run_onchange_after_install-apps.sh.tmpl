@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo ""
+echo "--- Installing Ghostty ---"
+
+if ! command -v ghostty >/dev/null 2>&1; then
+    . /etc/os-release
+
+    curl -fsSL \
+        "https://copr.fedorainfracloud.org/coprs/scottames/ghostty/repo/fedora-${VERSION_ID}/scottames-ghostty-fedora-${VERSION_ID}.repo" \
+        | sudo tee /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:scottames:ghostty.repo > /dev/null
+
+    rpm-ostree refresh-md
+    rpm-ostree install ghostty
+fi
+
+echo ""
+echo "--- Installing Brew ---"
+
+if ! command -v brew >/dev/null 2>&1; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+echo ""
+echo "--- Installing Brew packages ---"
+
+{{- range .packages.brew.formulae }}
+brew install {{ . }}
+{{- end }}
+
+echo ""
+echo "--- Setting up Flatpak ---"
+
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+echo ""
+echo "--- Installing Flatpak applications ---"
+
+{{- range .packages.flatpak.applications }}
+flatpak install -y flathub {{ . }}
+{{- end }}
+
+echo ""
+echo "--- Installing Mise ---"
+
+if ! command -v mise >/dev/null 2>&1; then
+    curl https://mise.run | sh
+fi

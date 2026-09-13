@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+read -r -p "Do you want to upgrade every package? [y/N] " reply
+[[ "$reply" != "y" && "$reply" != "Y" ]] && exit 0
+
+echo ""
+echo "--- Upgrading Fedora Silverblue ---"
+
+sudo rpm-ostree upgrade
+
+echo ""
+echo "--- Upgrading Flatpaks ---"
+
+flatpak update -y
+
+echo ""
+echo "--- Upgrading Homebrew ---"
+
+brew update
+brew upgrade
+brew cleanup
+
+echo ""
+echo "--- Upgrading Fisher plugins ---"
+
+fish -c "fisher update"
+
+echo ""
+echo "--- Upgrading mise ---"
+
+mise self-update -y
+mise upgrade
+
+echo ""
+echo "--- Upgrade completed ---"

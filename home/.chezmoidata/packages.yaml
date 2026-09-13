@@ -1,0 +1,16 @@
+packages:
+  brew:
+    formulae:
+      - fish
+      - gcc
+      - gopls
+      - zsh
+  flatpak:
+    applications:
+      - com.brave.Browser
+      - com.discordapp.Discord
+      - com.spotify.Client
+      - de.haeckerfelix.Fragments
+      - io.dbeaver.DBeaverCommunity
+      - md.obsidian.Obsidian
+      - org.videolan.VLC

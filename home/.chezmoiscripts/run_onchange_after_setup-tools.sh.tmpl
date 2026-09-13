@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo ""
+echo "--- Installing Mise tools ---"
+
+${HOME}/.local/bin/mise install
+
+echo ""
+echo "--- Setting up Fisher ---"
+
+fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source"
+fish -c "fisher update"
+
+echo ""
+echo "--- Installing OpenCode ---"
+curl -fsSL https://opencode.ai/install | bash
+
+echo ""
+echo "--- Generating fish completions ---"
+
+chezmoi completion fish --output=~/.config/fish/completions/chezmoi.fish
+mise completion fish > ~/.config/fish/completions/mise.fish
