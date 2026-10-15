@@ -1,3 +1,11 @@
+{{- $personal := promptBoolOnce . "personal" "Is this a personal computer? y/N" -}}
+
+cd:
+  command: fish
+
+data:
+    personal: {{ $personal}}
+
 diff:
   exclude:
     - scripts
