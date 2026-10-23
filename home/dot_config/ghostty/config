@@ -1,5 +1,8 @@
 theme = Catppuccin Macchiato
 mouse-hide-while-typing = true
-command = /home/linuxbrew/.linuxbrew/bin/zsh
+unfocused-split-opacity = 1
 maximize = true
+keybind = ctrl+enter=unbind
+copy-on-select = clipboard
+right-click-action = paste
 confirm-close-surface = false

@@ -1,6 +1,6 @@
 [user]
 	name = Diego Alves
-	email = ifdiego@users.noreply.github.com
+	email = odiegoasilva@gmail.com
 	signingKey = ~/.ssh/id_ed25519.pub
 [core]
 	editor = hx
@@ -9,10 +9,30 @@
 	autoSetupRemote = true
 	followTags = true
 [commit]
-	verbose = true
 	gpgSign = true
+	verbose = true
 [gpg]
 	format = ssh
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[branch]
+	sort = -committerdate
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	colorMovedWS = allow-indentation-change
+[merge]
+	conflictStyle = zdiff3
+[status]
+	showUntrackedFiles = all
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
+[pull]
+	rebase = true
+[fetch]
+	prune = true
 [init]
 	defaultBranch = main
 [rerere]
