@@ -41,6 +41,7 @@ ghostty = { copr = "scottames/ghostty" }
 go = "latest"
 rust = "stable"
 node = "lts"
+pnpm = "latest"
 usage = "latest"
 zig = "latest"
 zls = "latest"
@@ -79,8 +80,11 @@ zls = "latest"
 
 [tasks.bootstrap]
 run = [
-    "mise completion fish >~/.config/fish/completions/mise.fish",
+    "mkdir -p ~/.config/fish/completions && mise completion fish >~/.config/fish/completions/mise.fish",
 ]
+
+[tasks."test:bootstrap"]
+run = "podman build --platform linux/amd64 --file Dockerfile --tag dotfiles-test ."
 
 [dotfiles]
 "~/.config/git/config" = { source = "gitconfig", mode = "symlink" }

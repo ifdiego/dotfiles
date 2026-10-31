@@ -1,6 +1,0 @@
-{{ if eq .chezmoi.os "linux" -}}
-#!/usr/bin/env bash
-set -euo pipefail
-
-sudo dnf remove --assumeyes firefox
-{{ end -}}
